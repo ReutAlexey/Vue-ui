@@ -4,29 +4,42 @@
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-10">
           <v-toolbar dark color="primary">
-            <v-toolbar-title>Вход</v-toolbar-title>
+            <v-toolbar-title>Регистрация</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
             <v-form
-              ref="form"
+              ref="formRegister"
               v-model="valid"
               validation
             >
               <v-text-field
-                v-model="form.email"
                 prepend-icon="mdi-account-box"
-                name="email"
+                v-model="form.login" name="login"
+                label="Имя"
+                type="text"
+                require
+                :rules="textRules"
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-at"
+                v-model="form.email"
                 label="E-mail"
                 type="text"
                 require
                 :rules="emailRules"
               ></v-text-field>
               <v-text-field
-                v-model="form.password"
                 prepend-icon="mdi-lock"
-                name="password"
-                label="Password"
-                id="password"
+                v-model="form.password"
+                label="Пароль"
+                type="password"
+                require
+                :rules="textRules"
+              ></v-text-field>
+              <v-text-field
+                prepend-icon="mdi-lock"
+                v-model="form.password_confirm"
+                label="Повторите пароль"
                 type="password"
                 require
                 :rules="textRules"
@@ -34,14 +47,14 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <router-link class="ml-5" to="/register">Зарегистрироваться</router-link>
+            <router-link class="ml-5" to="/login">Уже есть аккаунт?</router-link>
             <v-spacer></v-spacer>
             <v-btn
               class="mr-10 mb-5"
               color="primary"
-              @click="login"
+              @click="register"
               :loading="loading"
-            ><v-icon left>mdi-exit-to-app</v-icon>Войти</v-btn>
+            ><v-icon left>mdi-account-plus</v-icon>Регистрация</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -53,7 +66,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'Login',
+  name: 'Register',
   data () {
     return {
       textRules: [
@@ -65,26 +78,26 @@ export default {
       ],
       valid: false,
       form: {
+        login: '',
         email: '',
-        password: ''
+        password: '',
+        password_confirm: ''
       }
     }
   },
   methods: {
-    ...mapActions(['LOGIN']),
+    ...mapActions(['REGISTER']),
     validate () {
-      this.$refs.form.validate()
+      this.$refs.formRegister.validate()
     },
-    login () {
+    register () {
       this.validate()
       if (this.valid) {
-        this.LOGIN(this.form)
+        this.REGISTER(this.form)
           .then(() => {
             this.$router.push('/')
           })
-          .catch(error => {
-            console.log(error)
-          })
+          .catch()
       }
     }
   },
