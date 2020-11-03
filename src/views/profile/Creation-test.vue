@@ -126,6 +126,7 @@
 import inputImage from '@/components/inputs/Input-image'
 import formQuest from '@/components/creation_test/forms/Form-quest'
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Creation-test',
@@ -156,6 +157,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['TEST_CREATION_FORM']),
     validate () {
       console.log(this.$refs.form.validate())
       this.$refs.form.validate()
@@ -228,11 +230,13 @@ export default {
       }
     }
   },
+  computed: {
+    creationForm () {
+      return this.$store.getters.GET_CREATION_FORM_TEST
+    }
+  },
   created () {
-    axios({ url: 'http://127.0.0.1:8000/api/test/create', method: 'GET' })
-      .then(res => {
-        this.formCreate = res.data
-      })
+    this.TEST_CREATION_FORM()
   }
 }
 </script>
