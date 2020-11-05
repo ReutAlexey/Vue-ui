@@ -237,6 +237,12 @@ export default {
   },
   created () {
     this.TEST_CREATION_FORM()
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 }
 </script>

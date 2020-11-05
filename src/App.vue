@@ -33,18 +33,30 @@
         </v-list>
       </v-menu>
       <v-spacer></v-spacer>
-      <v-btn
-        text
-        link
-        to="/register">
-        Регистрация
-      </v-btn>
-      <v-btn
-        text
-        link
-        to="/login">
-        Войти
-      </v-btn>
+      <div class="d-flex flex-row justify-center" v-if="isLogged">
+        <v-btn
+          small
+          class="ma-3"
+          text
+          link
+          to="/profile">Личный кабинет</v-btn>
+        <exit-button></exit-button>
+      </div>
+
+      <div v-if="!isLogged">
+        <v-btn
+          text
+          link
+          to="/register">
+          Регистрация
+        </v-btn>
+        <v-btn
+          text
+          link
+          to="/login">
+          Войти
+        </v-btn>
+      </div>
     </v-app-bar>
     <v-main>
       <router-view></router-view>
@@ -53,14 +65,22 @@
 </template>
 
 <script>
+import exitButton from './components/parts/Button-logout'
+
 export default {
   name: 'App',
-
   components: {
+    exitButton
   },
-
-  data: () => ({
-    //
-  })
+  methods: {
+  },
+  computed: {
+    isLogged () {
+      return this.$store.getters.IS_LOGGED_IN
+    }
+  },
+  created () {
+    this.$store.dispatch('IS_LOGGED')
+  }
 }
 </script>

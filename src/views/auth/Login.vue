@@ -31,6 +31,17 @@
               ></v-text-field>
             </v-form>
           </v-card-text>
+          <v-alert
+            v-if="errorForm"
+            color="red"
+          >
+            <ul>
+              <li
+                v-for="(error, index) in errorForm"
+                :key="index"
+              >{{error}}</li>
+            </ul>
+          </v-alert>
           <v-card-actions>
             <router-link class="ml-5" to="/register">Зарегистрироваться</router-link>
             <v-spacer></v-spacer>
@@ -62,6 +73,7 @@ export default {
         v => /.+@.+/.test(v) || 'E-mail must be valid'
       ],
       valid: false,
+      errorForm: null,
       form: {
         email: '',
         password: ''
@@ -81,7 +93,8 @@ export default {
             this.$router.push('/')
           })
           .catch(error => {
-            console.log(error)
+            var errors = Object.values(error.response.data)
+            this.errorForm = errors.flat()
           })
       }
     }

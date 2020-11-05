@@ -14,7 +14,7 @@
             >
               <v-text-field
                 prepend-icon="mdi-account-box"
-                v-model="form.login" name="login"
+                v-model="form.name" name="login"
                 label="Имя"
                 type="text"
                 require
@@ -38,13 +38,24 @@
               ></v-text-field>
               <v-text-field
                 prepend-icon="mdi-lock"
-                v-model="form.password_confirm"
+                v-model="form.password_confirmation"
                 label="Повторите пароль"
                 type="password"
                 require
                 :rules="textRules"
               ></v-text-field>
             </v-form>
+            <v-alert
+              v-if="errorForm"
+              color="red"
+              >
+            <ul>
+              <li
+                v-for="(error, index) in errorForm"
+                :key="index"
+              >{{error}}</li>
+            </ul>
+            </v-alert>
           </v-card-text>
           <v-card-actions>
             <router-link class="ml-5" to="/login">Уже есть аккаунт?</router-link>
@@ -77,11 +88,12 @@ export default {
         v => /.+@.+/.test(v) || 'E-mail must be valid'
       ],
       valid: false,
+      errorForm: null,
       form: {
-        login: '',
+        name: '',
         email: '',
         password: '',
-        password_confirm: ''
+        password_confirmation: ''
       }
     }
   },
@@ -97,7 +109,10 @@ export default {
           .then(() => {
             this.$router.push('/')
           })
-          .catch()
+          .catch(error => {
+            var errors = Object.values(error.response.data.errors)
+            this.errorForm = errors.flat()
+          })
       }
     }
   },

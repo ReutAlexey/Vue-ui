@@ -2,14 +2,14 @@ import axios from 'axios'
 
 export default {
   state: {
-    formCreateUrl: '/auth/test/create',
+    formCreateUrl: '/test/create',
     formSaveUrl: '/auth/test',
-    creationFormTest: {}
+    creationFormTest: null
   },
   actions: {
     async TEST_CREATION_FORM ({ commit }) {
       try {
-        const formCreate = await axios({ url: this.state.backendUrl + this.state.formCreateUrl, method: 'GET' })
+        const formCreate = await axios({ url: this.state.backendUrl + '/test/create', method: 'GET' })
         commit('M_TEST_CREATION_FORM', formCreate)
       } catch (error) {
         commit('M_SET_ERROR', error)
