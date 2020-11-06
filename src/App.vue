@@ -81,6 +81,9 @@ export default {
   },
   created () {
     this.$store.dispatch('IS_LOGGED')
+    if (this.$store.state.status === 'error') {
+      this.$router.push('/')
+    }
   }
 }
 </script>

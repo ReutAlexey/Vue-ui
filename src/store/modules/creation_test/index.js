@@ -8,13 +8,14 @@ export default {
   },
   actions: {
     async TEST_CREATION_FORM ({ commit }) {
-      try {
-        const formCreate = await axios({ url: this.state.backendUrl + '/test/create', method: 'GET' })
-        commit('M_TEST_CREATION_FORM', formCreate)
-      } catch (error) {
-        commit('M_SET_ERROR', error)
-        throw error
-      }
+      await axios({ url: this.state.backendUrl + '/test/create', method: 'GET' })
+        .then(response => {
+          console.log(response.data)
+          commit('M_TEST_CREATION_FORM', response.data)
+        })
+        .catch(error => {
+          commit('M_SET_ERROR', error)
+        })
     }
   },
   mutations: {

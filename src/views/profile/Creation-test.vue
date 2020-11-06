@@ -17,7 +17,7 @@
               label="Категория"
               v-model="formAddTest.categoryTest"
               class="pl-5"
-              :items="formCreate.categories"
+              :items="formCreate"
               item-text="category"
               item-value="id"
               require
@@ -27,7 +27,7 @@
               label="Тип бодсчета баллов"
               class="pl-10"
               v-model="formAddTest.typeCounting"
-              :items="formCreate.typeCounting"
+              :items="formCreate"
               item-text="type_counting"
               item-value="id"
               require
@@ -37,7 +37,7 @@
               label="Статус теста"
               class="pl-10"
               v-model="formAddTest.statusTest"
-              :items="formCreate.statusTests"
+              :items="formCreate"
               item-text="status"
               item-value="id"
               require
@@ -231,18 +231,10 @@ export default {
     }
   },
   computed: {
-    creationForm () {
-      return this.$store.getters.GET_CREATION_FORM_TEST
-    }
   },
   created () {
     this.TEST_CREATION_FORM()
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    this.formCreate = this.$store.getters.GET_CREATION_FORM_TEST
   }
 }
 </script>
