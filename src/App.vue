@@ -5,7 +5,7 @@
       color="blue"
       flat
     >
-      <v-toolbar-title>Test-Manager</v-toolbar-title>
+      <v-toolbar-title><router-link to="/">Test-Manager</router-link></v-toolbar-title>
       <v-menu
         left
         offset-y

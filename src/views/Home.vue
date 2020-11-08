@@ -1,8 +1,11 @@
 <template>
-  <div class="home">
+  <v-container>
     <h1>Home</h1>
     <h1>{{user}}</h1>
-  </div>
+    <v-item-group>
+
+    </v-item-group>
+  </v-container>
 </template>
 
 <script>

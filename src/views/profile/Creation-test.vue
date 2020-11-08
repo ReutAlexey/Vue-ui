@@ -15,9 +15,9 @@
           <div class="d-flex flex-row justify-center">
             <v-autocomplete
               label="Категория"
-              v-model="formAddTest.categoryTest"
+              v-model="formAddTest.category"
               class="pl-5"
-              :items="formCreate"
+              :items="formCreate.categories"
               item-text="category"
               item-value="id"
               require
@@ -26,9 +26,9 @@
             <v-autocomplete
               label="Тип бодсчета баллов"
               class="pl-10"
-              v-model="formAddTest.typeCounting"
-              :items="formCreate"
-              item-text="type_counting"
+              v-model="formAddTest.calculation"
+              :items="formCreate.calculations"
+              item-text="type"
               item-value="id"
               require
               :rules="textRules"
@@ -36,9 +36,9 @@
             <v-autocomplete
               label="Статус теста"
               class="pl-10"
-              v-model="formAddTest.statusTest"
-              :items="formCreate"
-              item-text="status"
+              v-model="formAddTest.status"
+              :items="formCreate.access"
+              item-text="type"
               item-value="id"
               require
               :rules="textRules"
@@ -94,7 +94,7 @@
         </v-card-actions>
         <v-card-actions>
           <form-quest
-            :typeCounting="formAddTest.typeCounting"
+            :typeCounting="formAddTest.calculation"
             ref="index"
             :class="quest.style"
             v-for="quest in formAddTest.quests"
@@ -117,8 +117,6 @@
         <v-btn @click="saveTest" color="success" block>Сохранить</v-btn>
       </v-card>
     </v-form>
-    {{errorInputs}}
-    <p>{{formAddTest}}</p>
   </v-container>
 </template>
 
@@ -126,7 +124,6 @@
 import inputImage from '@/components/inputs/Input-image'
 import formQuest from '@/components/creation_test/forms/Form-quest'
 import axios from 'axios'
-import { mapActions } from 'vuex'
 
 export default {
   name: 'Creation-test',
@@ -139,14 +136,15 @@ export default {
       textRules: [
         v => !!v || 'Заполните поле "Ответ"'
       ],
-      formCreate: [],
       valid: false,
+      formCreate: [],
       formAddTest: {
-        categoryTest: '',
-        statusTest: '',
-        typeCounting: '',
-        time: '',
-        numberAttempts: '',
+        userId: this.$store.getters.GET_USER.id,
+        category: '',
+        status: '',
+        calculation: '',
+        time: 0,
+        numberAttempts: 0,
         title: '',
         description: '',
         image: '',
@@ -157,9 +155,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['TEST_CREATION_FORM']),
     validate () {
-      console.log(this.$refs.form.validate())
       this.$refs.form.validate()
     },
     getImage (data) {
@@ -196,7 +192,6 @@ export default {
       this.errorInputs = ''
     },
     saveTest () {
-      // console.log(JSON.stringify(this.formAddTest))
       this.validateCheckBox()
       if (this.errorInputs === '') {
         this.validate()
@@ -230,11 +225,14 @@ export default {
       }
     }
   },
-  computed: {
-  },
   created () {
-    this.TEST_CREATION_FORM()
-    this.formCreate = this.$store.getters.GET_CREATION_FORM_TEST
+    axios({ url: 'http://127.0.0.1:8000/api/test/create', method: 'GET' })
+      .then(response => {
+        this.formCreate = response.data
+      })
+      .catch(() => {
+        this.$router.push('/')
+      })
   }
 }
 </script>
