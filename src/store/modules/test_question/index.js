@@ -1,6 +1,6 @@
 export default {
   state: {
-    quests: null
+    quests: []
   },
   actions: {},
   mutations: {
@@ -8,5 +8,9 @@ export default {
       state.quests = quests
     }
   },
-  getters: {}
+  getters: {
+    GET_QUEST (state) {
+      return state.quests
+    }
+  }
 }

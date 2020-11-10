@@ -11,16 +11,45 @@
           v-for="(item, i) in this.tests"
           :key="i"
           cols="12"
-          md="6"
+          md="4"
         >
-         <v-card>
+          <v-hover
+            v-slot="{ hover }"
+          >
+         <v-card
+           :elevation="hover ? 16 : 2"
+           :class="{ 'on-hover': hover }"
+           class="mx-auto"
+           height="auto"
+           max-width="350"
+           :to="'/test/' + item.id">
            <v-card-title>
-             {{ item.title}}
+             {{ item.title }}
            </v-card-title>
+           <v-img
+           :src="`https://img1.fonwall.ru/o/ye/aston-martin-cars-2019-cars-aston-martin-vanquish-vision.jpeg`"
+           height="150"
+           class="text-right pa-2"
+           >
+           <v-btn
+             icon
+             dark
+           >
+             <v-icon>
+               mdi-heart-outline
+             </v-icon>
+           </v-btn>
+           </v-img>
            <v-card-text>
-
+             <v-col>
+               <p>Количество попыток: <b>{{ item.number_attempts > 0 ? item.number_attempts : 'не ограничено' }}</b></p>
+               <p>Время на прохождение: <b>{{ item.time_test > 0 ?  item.time_test + 'сек' : 'не ограничено' }}</b></p>
+               <p>Катекория: <b>{{item.category.category}}</b></p>
+               <p>Автор: <b>{{item.user.name}}</b></p>
+             </v-col>
            </v-card-text>
          </v-card>
+          </v-hover>
         </v-col>
       </v-row>
     </v-item-group>
@@ -54,3 +83,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.v-card.on-hover.theme--dark
+  background-color: rgba(#FFF, 0.8)
+  >.v-card__text
+    color: #000
+</style>

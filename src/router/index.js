@@ -28,6 +28,16 @@ const routes = [
     path: '/profile',
     beforeEnter: authGuard,
     component: () => import('../views/profile/Show-profile')
+  },
+  {
+    path: '/test/:id',
+    component: () => import('../views/Show-test'),
+    children: [
+      {
+        path: 'quest',
+        component: () => import('../components/quest/Show-quest')
+      }
+    ]
   }
 ]
 
