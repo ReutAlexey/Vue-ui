@@ -1,89 +1,67 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="blue"
-      flat
+    <v-system-bar
+      height="40"
+      dark
+      fixed
     >
-      <v-toolbar-title><router-link to="/">Test-Manager</router-link></v-toolbar-title>
-      <v-menu
-        left
-        offset-y
-        class="ml-5"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            text
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon left>mdi-menu-down</v-icon>
-            Категории
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="n in 5"
-            :key="n"
-            @click="() => {}"
-          >
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <v-toolbar-title>Test-Manager</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="d-flex flex-row justify-center" v-if="isLogged">
+      <div>
         <v-btn
-          small
-          class="ma-3"
+          to="/register"
           text
-          link
-          to="/profile">Личный кабинет</v-btn>
-        <exit-button></exit-button>
-      </div>
-
-      <div v-if="!isLogged">
-        <v-btn
-          text
-          link
-          to="/register">
+        >
+          <v-icon left>mdi-account-plus</v-icon>
           Регистрация
         </v-btn>
+        |
         <v-btn
+          to="/login"
           text
-          link
-          to="/login">
-          Войти
+        >
+          <v-icon left>mdi-login</v-icon>
+          войти
         </v-btn>
       </div>
+    </v-system-bar>
+    <v-app-bar
+      color="#A9A9A9"
+      max-height="55"
+      class="mt-10"
+      fixed
+    >
+        <v-tabs
+          centered
+        >
+          <v-tab
+            v-for="link in navigationLinks"
+            :key="link"
+            :to="link.link"
+          >{{link.name}}</v-tab>
+        </v-tabs>
     </v-app-bar>
-    <v-main>
+    <v-main class="mainconteiner">
       <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import exitButton from './components/parts/Button-logout'
-
 export default {
   name: 'App',
-  components: {
-    exitButton
-  },
-  methods: {
-  },
-  computed: {
-    isLogged () {
-      return this.$store.getters.IS_LOGGED_IN
-    }
-  },
-  created () {
-    this.$store.dispatch('IS_LOGGED')
-    if (this.$store.state.status === 'error') {
-      this.$router.push('/')
+  data () {
+    return {
+      navigationLinks: [
+        { link: '/', name: 'Главная' },
+        { link: '/feedback', name: 'Обратная связь' }
+      ]
     }
   }
 }
 </script>
+<style scoped>
+.mainconteiner {
+  margin-top: 100px;
+}
+</style>
