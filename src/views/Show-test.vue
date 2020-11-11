@@ -9,7 +9,7 @@
     >
       <v-card-text>
         <v-img
-          src="https://img1.fonwall.ru/o/ye/aston-martin-cars-2019-cars-aston-martin-vanquish-vision.jpeg">
+          :src="test.image_link">
         </v-img>
         <h3>{{test.title}}</h3>
         <p>{{test.description}}</p>
@@ -23,11 +23,6 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <!--<router-link
-          class="mr-10 mb-5 v-btn v-btn&#45;&#45;contained theme&#45;&#45;light v-size&#45;&#45;default primary"
-          :to="'/test/' + id + '/quest'"
-          @click="hideCard"
-        >Наччать</router-link>-->
         <v-btn
           :to="'/test/' + id + '/quest'"
           @click="hideCard"
@@ -46,7 +41,7 @@ export default {
   data () {
     return {
       id: this.$route.params.id,
-      test: null,
+      test: [],
       hide: true
     }
   },
@@ -67,7 +62,6 @@ export default {
       .then(response => {
         this.test = response.data
         this.$store.commit('M_SET_QUESTION', response.data.quests)
-        console.log(response)
       })
       .catch(err => {
         console.log(err)

@@ -38,6 +38,10 @@ const routes = [
         component: () => import('../components/quest/Show-quest')
       }
     ]
+  },
+  {
+    path: '/result',
+    component: () => import('../views/test_pages/Show-test-result')
   }
 ]
 

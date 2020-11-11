@@ -27,7 +27,7 @@
              {{ item.title }}
            </v-card-title>
            <v-img
-           :src="`https://img1.fonwall.ru/o/ye/aston-martin-cars-2019-cars-aston-martin-vanquish-vision.jpeg`"
+           :src="item.image_link"
            height="150"
            class="text-right pa-2"
            >
@@ -77,7 +77,6 @@ export default {
   created () {
     axios({ url: 'http://127.0.0.1:8000/api/test', method: 'GET' })
       .then(response => {
-        console.log(response)
         this.tests = response.data
       })
   }
