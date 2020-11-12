@@ -12,7 +12,7 @@ export default {
       commit('M_CLEAR_ERROR')
       commit('M_SET_LOADING', true)
       try {
-        const user = await axios({ url: this.state.backendUrl + '/auth/login', method: 'POST', data: payload })
+        const user = await axios({ url: this.state.backendUrl + '/auth/login', method: 'PUT', data: payload })
         commit('M_SUCCESS_AUTH', user.data)
         commit('M_SET_LOADING', false)
       } catch (error) {
@@ -26,7 +26,7 @@ export default {
       commit('M_CLEAR_ERROR')
       commit('M_SET_LOADING', true)
       try {
-        const user = await axios({ url: this.state.backendUrl + '/auth/register', method: 'POST', data: payload })
+        const user = await axios({ url: this.state.backendUrl + '/auth/register', method: 'PUT', data: payload })
         commit('M_SUCCESS_AUTH', user.data)
         commit('M_SET_LOADING', false)
       } catch (error) {
@@ -46,7 +46,7 @@ export default {
         })
     },
     async LOGOUT ({ commit }) {
-      await axios({ url: this.state.backendUrl + '/auth/logout', method: 'POST' })
+      await axios({ url: this.state.backendUrl + '/auth/logout', method: 'PUT' })
       try {
         commit('M_REMOVE_USER')
       } catch (error) {

@@ -1,12 +1,11 @@
 <template>
-  <v-container>
     <v-form
       ref="form"
       v-model="valid"
       validation
     >
       <v-card>
-        <v-toolbar color="">
+        <v-toolbar color="#FFFF00">
           <v-toolbar-title>
             <b>Создание теста</b>
           </v-toolbar-title>
@@ -117,7 +116,6 @@
         <v-btn @click="saveTest" color="success" block>Сохранить</v-btn>
       </v-card>
     </v-form>
-  </v-container>
 </template>
 
 <script>

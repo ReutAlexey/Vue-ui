@@ -7,7 +7,9 @@
     >
       <v-toolbar-title>Test-Manager</v-toolbar-title>
       <v-spacer></v-spacer>
-      <div>
+      <div
+        v-show="!isLogged"
+      >
         <v-btn
           to="/register"
           text
@@ -24,6 +26,25 @@
           войти
         </v-btn>
       </div>
+      <div
+        v-show="isLogged"
+      >
+        <v-btn
+          to="/profile"
+          text
+        >
+          <v-icon left>mdi-login</v-icon>
+          Личный кабитнет
+        </v-btn>
+        <v-btn
+          to=""
+          text
+          @click="logout"
+        >
+          <v-icon left>mdi-login</v-icon>
+          Выйти
+        </v-btn>
+      </div>
     </v-system-bar>
     <v-app-bar
       color="#A9A9A9"
@@ -35,13 +56,39 @@
           centered
         >
           <v-tab
-            v-for="link in navigationLinks"
-            :key="link"
+            v-for="(link, index) in navigationLinks"
+            :key="index"
             :to="link.link"
           >{{link.name}}</v-tab>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-tab
+                color="primary"
+                dark
+                v-bind="attrs"
+                v-on="on"
+              >
+                Категории
+              </v-tab>
+            </template>
+            <v-list>
+              <v-list-item
+                v-for="(item, index) in items"
+                :key="index"
+              >
+                  <v-list-item-title>
+                    <router-link
+                      :to="item.link"
+                    >
+                      {{ item.title }}
+                    </router-link>
+                  </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-tabs>
     </v-app-bar>
-    <v-main class="mainconteiner">
+    <v-main>
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -55,13 +102,43 @@ export default {
       navigationLinks: [
         { link: '/', name: 'Главная' },
         { link: '/feedback', name: 'Обратная связь' }
+      ],
+      items: [
+        { title: 'ПДД', link: '/category/1' },
+        { title: 'IQ', link: '/category/1' },
+        { title: 'Математика', link: '/category/1' },
+        { title: 'Разное', link: '/category/1' }
       ]
     }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('LOGOUT')
+        .then(() => {
+          if (this.$route.fullPath !== '/') {
+            this.$router.push('/')
+          }
+        })
+    }
+  },
+  computed: {
+    isLogged () {
+      return this.$store.getters.IS_LOGGED_IN
+    }
+  },
+  created () {
+    this.$store.dispatch('IS_LOGGED')
   }
 }
 </script>
-<style scoped>
-.mainconteiner {
-  margin-top: 100px;
-}
+<style lang="sass" scoped>
+.mainconteiner
+  margin-top: 100px
+.description p
+  font-family: sans-serif
+  font-size: 20px
+  color: black
+.question
+  font-family: sans-serif
+  font-size: 20px
 </style>

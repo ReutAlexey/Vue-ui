@@ -3,7 +3,7 @@
     <v-layout align-center justify-center>
       <v-flex xs12 sm8 md4>
         <v-card class="elevation-10">
-          <v-toolbar dark color="primary">
+          <v-toolbar dark color="655f5e">
             <v-toolbar-title>Вход</v-toolbar-title>
           </v-toolbar>
           <v-card-text>
@@ -43,11 +43,14 @@
             </ul>
           </v-alert>
           <v-card-actions>
-            <router-link class="ml-5" to="/register">Зарегистрироваться</router-link>
+            <router-link
+              class="ml-5"
+              to="/register"
+            >Зарегистрироваться</router-link>
             <v-spacer></v-spacer>
             <v-btn
               class="mr-10 mb-5"
-              color="primary"
+              color="#becd92"
               @click="login"
               :loading="loading"
             ><v-icon left>mdi-exit-to-app</v-icon>Войти</v-btn>
@@ -102,6 +105,11 @@ export default {
   computed: {
     loading () {
       return this.$store.getters.GET_LOADING
+    }
+  },
+  created () {
+    if (this.$store.getters.IS_LOGGED_IN) {
+      this.$router.push('/')
     }
   }
 }

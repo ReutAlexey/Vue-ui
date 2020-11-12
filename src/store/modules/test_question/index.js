@@ -1,7 +1,63 @@
 export default {
   state: {
     quests: [],
-    testResult: ''
+    testResult: '',
+    tests: [
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        id: 1,
+        head: ' Test 1',
+        category: 'ПДД',
+        user: 'UserR',
+        timeTest: 34,
+        attempts: 4,
+        image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      }
+    ]
   },
   actions: {
     SET_TEST_RESULT ({ commit }, payload) {
@@ -17,6 +73,9 @@ export default {
     }
   },
   getters: {
+    GET_TEST (state) {
+      return state.tests
+    },
     GET_QUEST (state) {
       return state.quests
     },

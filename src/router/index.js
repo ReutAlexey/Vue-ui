@@ -8,7 +8,6 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
     component: Home
   },
   {
@@ -26,12 +25,17 @@ const routes = [
   },
   {
     path: '/profile',
-    beforeEnter: authGuard,
-    component: () => import('../views/profile/Show-profile')
+    component: () => import('../views/profile/Show-profile'),
+    children: [
+      {
+        path: '/profile/create-test',
+        component: () => import('../views/profile/Creation-test')
+      }
+    ]
   },
   {
     path: '/test/:id',
-    component: () => import('../views/Show-test'),
+    component: () => import('../views/test_pages/Test-page'),
     children: [
       {
         path: 'quest',

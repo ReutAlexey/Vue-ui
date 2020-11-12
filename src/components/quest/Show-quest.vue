@@ -1,38 +1,32 @@
 <template>
   <div>
     <p>quest</p>
-    {{quest[countQuest]}}
-    <p>{{answers}}</p>
-    <p>{{questCount}}</p>
     <v-card>
       <v-card-text>
+        <b>Вопрос №...</b>
         <v-img
-          v-show="quest[countQuest].image_link.length > 1"
-          :src="quest[countQuest].image_link"
+          :src="'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'"
         ></v-img>
       </v-card-text>
       <v-card-subtitle>
-
-        <p><b>{{quest[countQuest].quest}}</b></p>
+        <p class="question">
+          <b>
+            <v-icon
+              color="success"
+              large
+            >mdi-map-marker-question-outline</v-icon>
+            'Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст..'
+          </b>
+        </p>
       </v-card-subtitle>
-      <div
-        v-for="answer in quest[countQuest].answers"
-        :key="answer.id"
-      >
-      <v-card-text>
+      <div>
+      <v-card-text class="row">
         <v-checkbox
-          v-model="answers"
           label="jnd"
           color="success"
           hide-details
-          :value="answer.id"
         ></v-checkbox>
-        <v-img
-          v-if="answer.variant === 'image'"
-          :src="answer.image_link"
-          width="150"
-        ></v-img>
-        <p v-if="answer.variant === 'text'">{{answer.answer}}</p>
+        <p>Вариант ответа</p>
       </v-card-text>
       </div>
       <v-card-actions>
@@ -99,6 +93,5 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
 </style>
