@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   state: {
-    user: null,
+    user: {},
     status: '',
     loading: false,
     access_token: localStorage.getItem('access_token') || null
@@ -37,13 +37,12 @@ export default {
       }
     },
     async IS_LOGGED ({ commit }) {
-      await axios({ url: this.state.backendUrl + '/auth/me', method: 'POST' })
-        .then(response => {
-          commit('M_SET_USER', response.data)
-        })
-        .catch(() => {
-          commit('M_ERROR_AUTH')
-        })
+      try {
+        const user = await axios({ url: this.state.backendUrl + '/auth/me', method: 'POST' })
+        commit('M_SET_USER', user.data)
+      } catch (error) {
+        commit('M_ERROR_AUTH')
+      }
     },
     async LOGOUT ({ commit }) {
       await axios({ url: this.state.backendUrl + '/auth/logout', method: 'PUT' })
@@ -82,6 +81,9 @@ export default {
     },
     GET_USER (state) {
       return state.user
+    },
+    GET_USER_ID (state) {
+      return state.user.id
     }
   }
 }

@@ -57,11 +57,11 @@
 </template>
 
 <script>
-import inputText from '../inputs/Input-text-answer'
-import inputImage from '../inputs/Input-image-answer'
+import inputText from '../Inputs/Input-text-answer'
+import inputImage from '../Inputs/Input-image-answer'
 
 export default {
-  name: 'Form-input-image',
+  name: 'Answers-form',
   components: {
     inputText,
     inputImage

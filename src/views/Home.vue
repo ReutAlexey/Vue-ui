@@ -18,7 +18,7 @@
         <v-col
           cols="12"
           md="4"
-          v-for="(test, index) in cardTests"
+          v-for="(test, index) in getTests"
           :key="index"
         >
           <v-hover
@@ -40,11 +40,11 @@
               </v-img>
               <div class="row mr-2 ml-2">
                 <v-card-subtitle class="pb-0">
-                  Категория: {{test.category}}
+                  Категория: {{test.category.category}}
                 </v-card-subtitle>
                 <v-spacer></v-spacer>
                 <v-card-subtitle>
-                  Автор: {{test.user}}
+                  Автор: {{test.user.name}}
                 </v-card-subtitle>
               </div>
             </v-card>
@@ -62,7 +62,6 @@ export default {
   name: 'Home',
   data () {
     return {
-      cardTests: [],
       items: [
         {
           src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
@@ -84,10 +83,13 @@ export default {
   computed: {
     user () {
       return this.$store.getters.GET_USER
+    },
+    getTests () {
+      return this.$store.getters.GET_TESTS
     }
   },
   created () {
-    this.cardTests = this.$store.getters.GET_TEST
+    this.$store.dispatch('SET_TESTS')
   }
 }
 </script>

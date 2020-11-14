@@ -74,64 +74,64 @@ export default {
 </script>
 
 <style scoped>
-.Image-input {
-  display: flex;
-  width: 150px;
-  border: 2px solid #4a5568;
-  border-radius: 3px;
-  margin-left: 20px;
-}
+  .Image-input {
+    display: flex;
+    width: 150px;
+    border: 2px solid #4a5568;
+    border-radius: 3px;
+    margin-left: 20px;
+  }
 
-.Image-input__image-wrapper {
-  flex-basis: auto;
-  height: auto;
-  background: #eee;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
+  .Image-input__image-wrapper {
+    flex-basis: auto;
+    height: auto;
+    background: #eee;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
 
-.Image-input__image-wrapper {
-  color: #ccc;
-  font-size: 999px;
-  cursor: default;
-}
+  .Image-input__image-wrapper {
+    color: #ccc;
+    font-size: 999px;
+    cursor: default;
+  }
 
-.Image-input__image {
-  border-radius: 1px;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-}
+  .Image-input__image {
+    border-radius: 1px;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+  }
 
-.Image-input__input-wrapper {
-  overflow: hidden;
-  position: relative;
-  background: #eee;
-  border-radius: 1px;
-  float: left;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgba(0,0,0,0.2);
-  transition: 0.4s background;
-  width: auto;
-}
+  .Image-input__input-wrapper {
+    overflow: hidden;
+    position: relative;
+    background: #eee;
+    border-radius: 1px;
+    float: left;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0,0,0,0.2);
+    transition: 0.4s background;
+    width: auto;
+  }
 
-.Image-input__input-wrapper:hover {
-  background: #e0e0e0;
-}
+  .Image-input__input-wrapper:hover {
+    background: #e0e0e0;
+  }
 
-.Image-input__input {
-  display: block;
-  font-size: 200px;
-  min-height: 100%;
-  opacity: 0;
-  position: absolute;
-  right: 0;
-  text-align: right;
-  top: 0;
-  cursor: pointer;
-}
+  .Image-input__input {
+    display: block;
+    font-size: 200px;
+    min-height: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+    cursor: pointer;
+  }
 </style>

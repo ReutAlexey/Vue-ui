@@ -1,6 +1,7 @@
+import axios from 'axios'
+
 export default {
   state: {
-    quests: [],
     testResult: '',
     tests: [
       {
@@ -13,7 +14,7 @@ export default {
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       },
       {
-        id: 1,
+        id: 2,
         head: ' Test 1',
         category: 'ПДД',
         user: 'UserR',
@@ -22,7 +23,7 @@ export default {
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       },
       {
-        id: 1,
+        id: 3,
         head: ' Test 1',
         category: 'ПДД',
         user: 'UserR',
@@ -31,7 +32,7 @@ export default {
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       },
       {
-        id: 1,
+        id: 4,
         head: ' Test 1',
         category: 'ПДД',
         user: 'UserR',
@@ -40,7 +41,7 @@ export default {
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       },
       {
-        id: 1,
+        id: 5,
         head: ' Test 1',
         category: 'ПДД',
         user: 'UserR',
@@ -49,7 +50,7 @@ export default {
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       },
       {
-        id: 1,
+        id: 6,
         head: ' Test 1',
         category: 'ПДД',
         user: 'UserR',
@@ -57,30 +58,51 @@ export default {
         attempts: 4,
         image: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
       }
-    ]
+    ],
+    test: [],
+    questions: []
   },
   actions: {
-    SET_TEST_RESULT ({ commit }, payload) {
-      commit('M_SET_RESULT_TEST', payload)
+    async SET_TESTS ({ commit }) {
+      const tests = await axios({ url: this.state.backendUrl + '/test', method: 'GET' })
+      try {
+        commit('M_SET_TESTS', tests.data)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    async SET_TEST ({ commit }, id) {
+      try {
+        const test = await axios({ url: this.state.backendUrl + '/test/' + id, method: 'GET', data: id })
+        console.log(test.data)
+        commit('M_SET_TEST', test.data)
+        commit('M_SET_QUESTIONS', test.data.quests)
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   mutations: {
-    M_SET_QUESTION (state, quests) {
-      state.quests = quests
+    M_SET_TESTS (state, payload) {
+      state.tests = payload
     },
-    M_SET_RESULT_TEST (state, payload) {
-      state.testResult = payload
+    M_SET_TEST (state, payload) {
+      state.test = payload
+    },
+    M_SET_QUESTIONS (state, payload) {
+      console.log(payload)
+      state.questions = payload
     }
   },
   getters: {
     GET_TEST (state) {
+      return state.test
+    },
+    GET_TESTS (state) {
       return state.tests
     },
-    GET_QUEST (state) {
-      return state.quests
-    },
-    GET_RESULT (state) {
-      return state.testResult
+    GET_QUESTIONS (state) {
+      return state.questions
     }
   }
 }

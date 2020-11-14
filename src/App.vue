@@ -30,7 +30,7 @@
         v-show="isLogged"
       >
         <v-btn
-          to="/profile"
+          :to="'/profile/' + getUserId"
           text
         >
           <v-icon left>mdi-login</v-icon>
@@ -124,6 +124,9 @@ export default {
   computed: {
     isLogged () {
       return this.$store.getters.IS_LOGGED_IN
+    },
+    getUserId () {
+      return this.$store.getters.GET_USER.id
     }
   },
   created () {
@@ -131,7 +134,7 @@ export default {
   }
 }
 </script>
-<style lang="sass" scoped>
+<style lang="sass">
 .mainconteiner
   margin-top: 100px
 .description p

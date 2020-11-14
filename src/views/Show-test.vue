@@ -1,53 +1,42 @@
 <template>
-  <v-container>
-    <h1>Test {{id}}</h1>
+  <v-container class="mainconteiner">
     <v-card
       v-if="hide"
-      class="mx-auto"
-      height="auto"
-      max-width="700"
     >
+      <v-img
+        height="400"
+        width="500"
+        :src="showTest.image"
+      ></v-img>
+      <v-card-title><b>{{showTest.head}}</b></v-card-title>
+      <v-card-subtitle class="description">
+        <p>{{showTest.description}}</p>
+      </v-card-subtitle>
       <v-card-text>
-        <v-img
-          :src="test.image_link">
-        </v-img>
-        <h3>{{test.title}}</h3>
-        <p>{{test.description}}</p>
-      </v-card-text>
-      <v-card-text>
-        <p>Количество вопросов: <b></b></p>
-        <p>Время прохождения: <b>{{test.time_test > 0 ? test.time_test : 'не ограничено'}}</b></p>
-        <p>Количество попыток: <b>{{test.number_attempts> 0 ? test.number_attempts : 'не ограничено'}}</b></p>
-        <p>Категория: <b>{{test.category.category}}</b></p>
-        <p><b></b></p>
+        <p>Кол-во попыток: {{showTest.attempts}}</p>
+        <p>Время прохождения: {{showTest.time}}</p>
+        <p>Категория:{{showTest.category.category}}</p>
+        <p>Автор:{{showTest.user.name}}</p>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
         <v-btn
-          :to="'/test/' + id + '/quest'"
+          block
+          color="#2cd42d"
+          :to="'/test/' + this.$route.params.id + '/question'"
           @click="hideCard"
         >Начать</v-btn>
       </v-card-actions>
     </v-card>
-    <router-view></router-view>
+    <router-view v-if="!hide"></router-view>
   </v-container>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Show-test',
   data () {
     return {
-      id: this.$route.params.id,
-      test: [],
       hide: true
-    }
-  },
-  watch: {
-    $route (toR, fromR) {
-      this.id = toR.params.id
     }
   },
   methods: {
@@ -56,16 +45,12 @@ export default {
     }
   },
   computed: {
+    showTest () {
+      return this.$store.getters.GET_TEST
+    }
   },
   created () {
-    axios({ url: 'http://127.0.0.1:8000/api/test/' + this.id, method: 'GET' })
-      .then(response => {
-        this.test = response.data
-        this.$store.commit('M_SET_QUESTION', response.data.quests)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    this.$store.dispatch('SET_TEST', this.$route.params.id)
   }
 }
 </script>

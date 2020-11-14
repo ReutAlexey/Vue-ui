@@ -10,6 +10,7 @@ const routes = [
     path: '/',
     component: Home
   },
+  // Route group for user authorization
   {
     path: '/register',
     component: () => import('../views/auth/Registration.vue')
@@ -18,34 +19,28 @@ const routes = [
     path: '/login',
     component: () => import('../views/auth/Login.vue')
   },
+  // Group of routes for your personal account
   {
-    path: '/create-test',
-    beforeEnter: authGuard,
-    component: () => import('../views/profile/Creation-test')
-  },
-  {
-    path: '/profile',
+    path: '/profile/:idUser',
     component: () => import('../views/profile/Show-profile'),
+    beforeEnter: authGuard,
     children: [
       {
-        path: '/profile/create-test',
-        component: () => import('../views/profile/Creation-test')
+        path: 'create-test',
+        component: () => import('@/components/profile/create_test/Form-create-test')
       }
     ]
   },
+  // Route test
   {
     path: '/test/:id',
-    component: () => import('../views/test_pages/Test-page'),
+    component: () => import('@/views/Show-test'),
     children: [
       {
-        path: 'quest',
-        component: () => import('../components/quest/Show-quest')
+        path: 'question',
+        component: () => import('@/components/test/Questions')
       }
     ]
-  },
-  {
-    path: '/result',
-    component: () => import('../views/test_pages/Show-test-result')
   }
 ]
 

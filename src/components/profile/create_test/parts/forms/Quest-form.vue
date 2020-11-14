@@ -40,10 +40,10 @@
 
 <script>
 import inputImage from '@/components/inputs/Input-image'
-import answerForm from './Form-answers'
+import answerForm from './Answers-form'
 
 export default {
-  name: 'Form-quest',
+  name: 'Quest-form',
   components: {
     inputImage,
     answerForm
