@@ -74,12 +74,20 @@ export default {
     async SET_TEST ({ commit }, id) {
       try {
         const test = await axios({ url: this.state.backendUrl + '/test/' + id, method: 'GET', data: id })
-        console.log(test.data)
         commit('M_SET_TEST', test.data)
         commit('M_SET_QUESTIONS', test.data.quests)
       } catch (error) {
         console.log(error)
       }
+    },
+    CALCULATIONS_RESULT ({ commit }, payload) {
+      axios({ url: this.state.backendUrl + '/test/calculation', data: payload, method: 'PUT' })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   mutations: {
@@ -90,7 +98,6 @@ export default {
       state.test = payload
     },
     M_SET_QUESTIONS (state, payload) {
-      console.log(payload)
       state.questions = payload
     }
   },
