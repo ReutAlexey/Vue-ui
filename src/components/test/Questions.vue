@@ -1,19 +1,34 @@
-<template class="justify-center flex">
+<template>
   <div>
     <v-alert
-      class="alert-result"
-      :value="alert"
+      v-if="result"
+      class="alert-result align-center"
       color="info"
       dark
       border="top"
-      icon="mdi-home"
+      icon="mdi-alert"
       transition="scale-transition"
     >
-      Phasellus tempus. Fusce ac felis sit amet ligula pharetra condimentum. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Pellentesque posuere. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo.
-
-      Phasellus nec sem in justo pellentesque facilisis. Phasellus magna. Cras risus ipsum, faucibus ut, ullamcorper id, varius ac, leo. In hac habitasse platea dictumst. Praesent turpis.
+      <v-row align="center">
+        <v-col class="grow">
+          Результат прохождения теста <b>{{result}}</b>
+        </v-col>
+        <v-col class="shrink">
+          <v-btn @click="restartTest">
+            Пройти еще раз
+          </v-btn>
+        </v-col>
+        <v-col class="shrink">
+          <v-btn @click="goHome">
+            На главную
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-alert>
-  <v-card width="60%">
+  <v-card
+    width="60%"
+    v-if="!result"
+  >
     <h3>Вопрос: {{i + 1}}/{{questions.length}}</h3>
     <v-img
       contain
@@ -23,9 +38,10 @@
       :src="questions[i].image"
     ></v-img>
     <v-card-title>{{questions[i].quest}}</v-card-title>
-    <v-card>
+    <v-card
+      class="ma-3"
+    >
       <v-card-text>
-        {{arrAnswers}}
         <div
         v-for="answer in questions[i].answers"
         :key="answer.id"
@@ -35,7 +51,7 @@
             v-show="answer.variant === 'text'"
           >
             <v-checkbox
-              v-model="arrAnswers"
+              v-model="arrAnswers[i]"
               :value="answer.id"
             ></v-checkbox>
             <p class="mt-5">{{answer.answer}}</p>
@@ -45,7 +61,7 @@
             v-show="answer.variant === 'image'"
           >
             <v-checkbox
-              v-model="arrAnswers"
+              v-model="arrAnswers[i]"
               :value="answer.id"
             ></v-checkbox>
            <v-img
@@ -61,7 +77,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
-        color="succes"
+        color="success"
         @click="nextQuestion"
       >Далее</v-btn>
     </v-card-actions>
@@ -76,17 +92,33 @@ export default {
     return {
       questions: [],
       answers: [],
-      arrAnswers: [],
+      arrAnswers: [[]],
       i: 0
     }
   },
   methods: {
     nextQuestion () {
-      if (this.i === (this.questions.length - 1)) {
+      if (this.i === (this.questions.length - 1) && this.arrAnswers[this.i].length > 0) {
         this.$store.dispatch('CALCULATIONS_RESULT', { answers: this.arrAnswers, testId: this.questions[0].test_id })
-      } else {
+      } else if (this.arrAnswers[this.i].length > 0) {
+        this.arrAnswers.push([])
         ++this.i
       }
+    },
+    restartTest () {
+      this.$store.commit('M_SET_RESULT', false)
+      this.$store.dispatch('CHANGE_HIDE', true)
+      this.$router.push('/test/' + this.$route.params.id)
+    },
+    goHome () {
+      this.$store.commit('M_SET_RESULT', false)
+      this.$store.dispatch('CHANGE_HIDE', true)
+      this.$router.push('/')
+    }
+  },
+  computed: {
+    result () {
+      return this.$store.getters.GET_RESULT
     }
   },
   created () {

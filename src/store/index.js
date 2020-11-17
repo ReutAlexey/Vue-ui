@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Auth from './modules/auth'
 import Shared from './modules/shared'
 import TestQuestion from './modules/test_question'
+import Category from './modules/category'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
   modules: {
     Auth,
     Shared,
-    TestQuestion
+    TestQuestion,
+    Category
   }
 })

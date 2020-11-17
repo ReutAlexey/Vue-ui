@@ -1,5 +1,8 @@
 <template>
-  <v-app>
+  <v-app
+    style="background-color: #FFFFFF
+"
+  >
     <v-system-bar
       height="40"
       dark
@@ -73,14 +76,14 @@
             </template>
             <v-list>
               <v-list-item
-                v-for="(item, index) in items"
-                :key="index"
+                v-for="item in category"
+                :key="item.id"
               >
                   <v-list-item-title>
                     <router-link
-                      :to="item.link"
+                      :to="'/category/' + item.slug + '/' + item.id"
                     >
-                      {{ item.title }}
+                      {{ item.category }}
                     </router-link>
                   </v-list-item-title>
               </v-list-item>
@@ -127,10 +130,14 @@ export default {
     },
     getUserId () {
       return this.$store.getters.GET_USER.id
+    },
+    category () {
+      return this.$store.getters.GET_CATEGORY
     }
   },
   created () {
     this.$store.dispatch('IS_LOGGED')
+    this.$store.dispatch('A_CATEGORY')
   }
 }
 </script>

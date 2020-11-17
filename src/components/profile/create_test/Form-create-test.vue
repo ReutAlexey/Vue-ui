@@ -113,7 +113,12 @@
         text
         type="error"
       >{{errorInputs}}</v-alert>
-      <v-btn @click="saveTest" color="success" block>Сохранить</v-btn>
+      <v-btn
+        @click="saveTest"
+        color="success"
+        block
+        :loading="loading"
+      >Сохранить</v-btn>
     </v-card>
   </v-form>
 </template>
@@ -194,9 +199,11 @@ export default {
       if (this.errorInputs === '') {
         this.validate()
         if (this.valid === true) {
-          axios({ url: 'http://127.0.0.1:8000/api/test', method: 'POST', data: this.formAddTest })
+          this.$store.dispatch('SET_LOADING', true)
+          axios({ url: 'http://127.0.0.1:8000/api/users/tests', method: 'POST', data: this.formAddTest })
             .then(res => {
-              console.log(JSON.stringify(res.data))
+              this.$store.dispatch('SET_LOADING', false)
+              this.$router.push('/test/' + res.data.id)
             })
             .catch(error => {
               console.log(error)
@@ -223,8 +230,13 @@ export default {
       }
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.GET_LOADING
+    }
+  },
   created () {
-    axios({ url: 'http://127.0.0.1:8000/api/test/create', method: 'GET' })
+    axios({ url: 'http://127.0.0.1:8000/api/users/tests/create', method: 'GET' })
       .then(response => {
         this.formCreate = response.data
       })

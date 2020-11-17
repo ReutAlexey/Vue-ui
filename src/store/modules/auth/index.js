@@ -71,7 +71,7 @@ export default {
     },
     M_REMOVE_USER (state) {
       state.user = null
-      state.access_token = null
+      state.access_token = ''
       localStorage.removeItem('access_token')
     }
   },

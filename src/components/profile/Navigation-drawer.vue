@@ -9,6 +9,7 @@
         v-for="(item, index) in profileMenu"
         :key="index"
         link
+        :disabled="!item.type"
       >
         <v-list-item-content>
           <v-list-item-title>
@@ -31,10 +32,10 @@ export default {
   data () {
     return {
       profileMenu: [
-        { link: '/profile/' + this.$store.getters.GET_USER.id + '/create-test', name: 'Создать тест' },
-        { link: '/profile/create-test', name: 'Мои тесты' },
-        { link: '/profile/create-test', name: 'Мои классы' },
-        { link: '/profile/create-test', name: 'Создать класс' }
+        { link: '/profile/' + this.$store.getters.GET_USER.id + '/create-test', name: 'Создать тест', type: true },
+        { link: '/profile/create-test', name: 'Мои тесты', type: false },
+        { link: '/profile/create-test', name: 'Мои классы', type: false },
+        { link: '/profile/create-test', name: 'Создать класс', type: false }
       ]
     }
   },

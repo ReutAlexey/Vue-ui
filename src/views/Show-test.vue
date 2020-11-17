@@ -27,7 +27,9 @@
         >Начать</v-btn>
       </v-card-actions>
     </v-card>
-    <router-view v-if="!hide"></router-view>
+    <router-view
+      class="d-flex justify-center mb-6"
+      v-if="!hide"></router-view>
   </v-container>
 </template>
 
@@ -36,17 +38,19 @@ export default {
   name: 'Show-test',
   data () {
     return {
-      hide: true
     }
   },
   methods: {
     hideCard () {
-      this.hide = false
+      this.$store.dispatch('CHANGE_HIDE', false)
     }
   },
   computed: {
     showTest () {
       return this.$store.getters.GET_TEST
+    },
+    hide () {
+      return this.$store.getters.GET_HIDE
     }
   },
   created () {
