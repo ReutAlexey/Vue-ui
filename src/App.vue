@@ -129,7 +129,7 @@ export default {
       return this.$store.getters.IS_LOGGED_IN
     },
     getUserId () {
-      return this.$store.getters.GET_USER.id
+      return this.$store.getters.GET_USER_ID
     },
     category () {
       return this.$store.getters.GET_CATEGORY

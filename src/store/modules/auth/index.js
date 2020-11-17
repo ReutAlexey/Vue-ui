@@ -70,14 +70,14 @@ export default {
       localStorage.removeItem('access_token')
     },
     M_REMOVE_USER (state) {
-      state.user = null
+      state.user = {}
       state.access_token = ''
       localStorage.removeItem('access_token')
     }
   },
   getters: {
     IS_LOGGED_IN (state) {
-      return state.access_token !== null
+      return state.access_token // !== null
     },
     GET_USER (state) {
       return state.user

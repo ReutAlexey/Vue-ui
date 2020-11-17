@@ -45,16 +45,12 @@ const routes = [
   {
     path: '/category/:category/:id',
     component: () => import('@/components/test_category/Category')
-  }
+  },
   // Page 404
-  /* {
-    path: '/404',
-    name: '404',
-    component: NotFound,
-  }, {
+  {
     path: '*',
-    redirect: '/404'
-  } */
+    redirect: '/'
+  }
 ]
 
 const router = new VueRouter({
