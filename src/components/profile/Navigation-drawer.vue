@@ -4,6 +4,13 @@
       dense
       nav
     >
+      <v-list-item :to="'/profile/' + getUser.id" link class="ma-2">
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            {{getUser.name}}
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
       <v-list-item
         class="ml-4"
         v-for="(item, index) in profileMenu"
@@ -32,17 +39,16 @@ export default {
   data () {
     return {
       profileMenu: [
-        { link: '/profile/' + this.$store.getters.GET_USER.id + '/create-test', name: 'Создать тест', type: true },
-        { link: '/profile/create-test', name: 'Мои тесты', type: false },
+        { link: '/profile/' + this.$store.getters.GET_USER_ID + '/create-test', name: 'Создать тест', type: true },
+        { link: '/profile/' + this.$store.getters.GET_USER_ID + '/my-tests', name: 'Мои тесты', type: true },
         { link: '/profile/create-test', name: 'Мои классы', type: false },
         { link: '/profile/create-test', name: 'Создать класс', type: false }
       ]
     }
   },
   computed: {
-    getUserId () {
-      console.log(this.$store.getters.GET_USER)
-      return this.$store.getters.GET_USER.id
+    getUser () {
+      return this.$store.getters.GET_USER
     }
   }
 }

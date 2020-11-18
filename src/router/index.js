@@ -28,6 +28,10 @@ const routes = [
       {
         path: 'create-test',
         component: () => import('@/components/profile/create_test/Form-create-test')
+      },
+      {
+        path: 'my-tests',
+        component: () => import('@/components/profile/my_tests/My-tests')
       }
     ]
   },
