@@ -203,6 +203,7 @@ export default {
           axios({ url: 'http://127.0.0.1:8000/api/users/tests', method: 'POST', data: this.formAddTest })
             .then(res => {
               this.$store.dispatch('SET_LOADING', false)
+              console.log(res.data)
               console.log(res.data.id)
               this.$router.push('/test/' + res.data.id)
             })

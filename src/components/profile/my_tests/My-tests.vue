@@ -4,7 +4,6 @@
     <v-simple-table
       fixed-header
       height="auto"
-      dark
     >
       <template v-slot:default>
         <thead>
@@ -52,7 +51,6 @@ export default {
   created () {
     axios({ url: 'http://127.0.0.1:8000/api/users/tests', method: 'GET' })
       .then(response => {
-        console.log(response.data)
         this.myTest = response.data
       })
       .catch(error => {
