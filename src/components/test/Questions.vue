@@ -99,6 +99,7 @@ export default {
   methods: {
     nextQuestion () {
       if (this.i === (this.questions.length - 1) && this.arrAnswers[this.i].length > 0) {
+        console.log(JSON.stringify({ answers: this.arrAnswers, testId: this.questions[0].test_id }))
         this.$store.dispatch('CALCULATIONS_RESULT', { answers: this.arrAnswers, testId: this.questions[0].test_id })
       } else if (this.arrAnswers[this.i].length > 0) {
         this.arrAnswers.push([])

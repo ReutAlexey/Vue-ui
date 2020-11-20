@@ -238,7 +238,7 @@ export default {
     }
   },
   created () {
-    axios({ url: 'http://127.0.0.1:8000/api/users/tests/create', method: 'GET' })
+    axios({ url: 'http://127.0.0.1:8000/api/user/tests/create', method: 'GET' })
       .then(response => {
         this.formCreate = response.data
       })

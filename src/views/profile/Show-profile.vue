@@ -14,6 +14,11 @@ export default {
   name: 'Show-profile',
   components: {
     NavigationDrawer
+  },
+  created () {
+    if (`${this.$route.params.idUser}` !== `${this.$store.getters.GET_USER_ID}`) {
+      this.$router.push('/')
+    }
   }
 }
 </script>

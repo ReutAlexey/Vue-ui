@@ -34,10 +34,13 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Show-test',
   data () {
     return {
+      test: []
     }
   },
   methods: {
@@ -46,15 +49,16 @@ export default {
     }
   },
   computed: {
-    showTest () {
-      return this.$store.getters.GET_TEST
-    },
+
     hide () {
       return this.$store.getters.GET_HIDE
     }
   },
   created () {
-    this.$store.dispatch('SET_TEST', this.$route.params.id)
+    axios({ url: this.$store.state.backendUrl + '/quest/tests/' + this.$route.params.id, method: 'GET' })
+      .then(response => {
+        console.log(response.data)
+      })
   }
 }
 </script>
@@ -62,3 +66,4 @@ export default {
 <style scoped>
 
 </style>
+Vak51~eCzc99

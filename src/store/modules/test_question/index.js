@@ -20,7 +20,7 @@ export default {
     },
     async SET_TEST ({ commit }, id) {
       try {
-        const test = await axios({ url: this.state.backendUrl + '/guest/tests/' + id, method: 'GET', data: id })
+        const test = await axios({ url: this.state.backendUrl + '/guest/tests/' + id, method: 'GET' })
         commit('M_SET_TEST', test.data)
         commit('M_SET_QUESTIONS', test.data.quests)
       } catch (error) {
@@ -37,7 +37,7 @@ export default {
     },
     async CALCULATIONS_RESULT ({ commit }, payload) {
       try {
-        const result = await axios({ url: this.state.backendUrl + '/guest/tests/calculation', data: payload, method: 'PUT' })
+        const result = await axios({ url: this.state.backendUrl + '/calculation/result', data: payload, method: 'PUT' })
         commit('M_SET_RESULT', result.data)
       } catch (error) {
         console.log(error)

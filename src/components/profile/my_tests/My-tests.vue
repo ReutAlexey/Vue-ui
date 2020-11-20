@@ -49,7 +49,7 @@ export default {
     }
   },
   created () {
-    axios({ url: 'http://127.0.0.1:8000/api/users/tests', method: 'GET' })
+    axios({ url: 'http://127.0.0.1:8000/api/user/tests', method: 'GET' })
       .then(response => {
         this.myTest = response.data
       })
