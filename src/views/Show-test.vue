@@ -6,17 +6,17 @@
       <v-img
         height="400"
         width="500"
-        :src="showTest.image"
+        :src="GET_TEST.image"
       ></v-img>
-      <v-card-title><b>{{showTest.head}}</b></v-card-title>
+      <v-card-title><b>{{GET_TEST.head}}</b></v-card-title>
       <v-card-subtitle class="description">
-        <p>{{showTest.description}}</p>
+        <p>{{GET_TEST.description}}</p>
       </v-card-subtitle>
       <v-card-text>
-        <p>Кол-во попыток: {{showTest.attempts}}</p>
-        <p>Время прохождения: {{showTest.time}}</p>
-        <p>Категория:{{showTest.category.category}}</p>
-        <p>Автор:{{showTest.user.name}}</p>
+        <p>Кол-во попыток: {{GET_TEST.attempts}}</p>
+        <p>Время прохождения: {{test.time}}</p>
+        <p>Категория:{{GET_TEST.category}}</p>
+        <p>Автор:{{GET_TEST.user.name}}</p>
       </v-card-text>
       <v-card-actions>
         <v-btn
@@ -34,13 +34,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Show-test',
   data () {
     return {
-      test: []
+      test: [],
+      testId: this.$route.params.id
     }
   },
   methods: {
@@ -49,16 +50,19 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters(['GET_TEST']),
     hide () {
       return this.$store.getters.GET_HIDE
     }
   },
+  watch: {
+    $route (toR, fromR) {
+      this.$store.dispatch('A_LOAD_TEST', toR.params.id)
+    }
+  },
   created () {
-    axios({ url: this.$store.state.backendUrl + '/quest/tests/' + this.$route.params.id, method: 'GET' })
-      .then(response => {
-        console.log(response.data)
-      })
+    this.$store.dispatch('A_LOAD_TEST', this.testId)
+    this.test = this.$store.getters.GET_TEST
   }
 }
 </script>

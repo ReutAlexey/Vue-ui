@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-alert
-      v-if="result"
+      v-if="GET_RESULT"
       class="alert-result align-center"
       color="info"
       dark
@@ -11,7 +11,7 @@
     >
       <v-row align="center">
         <v-col class="grow">
-          Результат прохождения теста <b>{{result}}</b>
+          Результат прохождения теста <b>{{GET_RESULT}}</b>
         </v-col>
         <v-col class="shrink">
           <v-btn @click="restartTest">
@@ -27,23 +27,23 @@
     </v-alert>
   <v-card
     width="60%"
-    v-if="!result"
+    v-if="!GET_RESULT"
   >
-    <h3>Вопрос: {{i + 1}}/{{questions.length}}</h3>
+    <h3>Вопрос: {{i + 1}}/{{GET_QUESTIONS.length}}</h3>
     <v-img
       contain
       max-height="400"
       max-width="500"
-      v-if="questions[i].image"
-      :src="questions[i].image"
+      v-if="GET_QUESTIONS[i].image"
+      :src="GET_QUESTIONS[i].image"
     ></v-img>
-    <v-card-title>{{questions[i].quest}}</v-card-title>
+    <v-card-title>{{GET_QUESTIONS[i].quest}}</v-card-title>
     <v-card
       class="ma-3"
     >
       <v-card-text>
         <div
-        v-for="answer in questions[i].answers"
+        v-for="answer in GET_QUESTIONS[i].answers"
         :key="answer.id"
         >
           <div
@@ -86,6 +86,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Questions',
   data () {
@@ -98,32 +100,30 @@ export default {
   },
   methods: {
     nextQuestion () {
-      if (this.i === (this.questions.length - 1) && this.arrAnswers[this.i].length > 0) {
-        console.log(JSON.stringify({ answers: this.arrAnswers, testId: this.questions[0].test_id }))
-        this.$store.dispatch('CALCULATIONS_RESULT', { answers: this.arrAnswers, testId: this.questions[0].test_id })
+      if (this.i === (this.GET_QUESTIONS.length - 1) && this.arrAnswers[this.i].length > 0) {
+        console.log('send test')
+        this.$store.dispatch('CALCULATIONS_RESULT', { answers: this.arrAnswers, testId: this.GET_TEST_ID })
       } else if (this.arrAnswers[this.i].length > 0) {
         this.arrAnswers.push([])
         ++this.i
       }
     },
     restartTest () {
-      this.$store.commit('M_SET_RESULT', false)
-      this.$store.dispatch('CHANGE_HIDE', true)
+      this.$store.commit('M_CLEAR_TEST')
       this.$router.push('/test/' + this.$route.params.id)
     },
     goHome () {
-      this.$store.commit('M_SET_RESULT', false)
-      this.$store.dispatch('CHANGE_HIDE', true)
+      this.$store.commit('M_CLEAR_TEST')
       this.$router.push('/')
     }
   },
   computed: {
-    result () {
-      return this.$store.getters.GET_RESULT
-    }
+    ...mapGetters(['GET_QUESTIONS', 'GET_RESULT', 'GET_TEST_ID'])
   },
-  created () {
-    this.questions = this.$store.getters.GET_QUESTIONS
+  watch: {
+    $route (toR, fromR) {
+      this.testId = toR.params.id
+    }
   }
 }
 </script>

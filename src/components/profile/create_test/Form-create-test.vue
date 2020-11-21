@@ -200,7 +200,7 @@ export default {
         this.validate()
         if (this.valid === true) {
           this.$store.dispatch('SET_LOADING', true)
-          axios({ url: 'http://127.0.0.1:8000/api/users/tests', method: 'POST', data: this.formAddTest })
+          axios({ url: 'http://127.0.0.1:8000/api/user/tests', method: 'POST', data: this.formAddTest })
             .then(res => {
               this.$store.dispatch('SET_LOADING', false)
               console.log(res.data)

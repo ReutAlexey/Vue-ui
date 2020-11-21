@@ -20,6 +20,12 @@
           <th class="text-left">
             Тип подсчета баллов
           </th>
+          <th class="text-left">
+            Ср.рез-ат
+          </th>
+          <th class="text-left">
+            Действия
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -31,10 +37,29 @@
           <td>{{ test.access.type }}</td>
           <td>{{ test.category.category}}</td>
           <td>{{ test.calculation.type}}</td>
+          <td style="color: springgreen">
+            {{ test.result }}
+            <span v-show="test.calculation.slug === 'Ball'">B</span>
+            <span v-show="test.calculation.slug === 'Percent'">%</span>
+          </td>
+          <td>
+            <v-btn color="warning">
+              <v-icon left>mdi-pencil-outline</v-icon>
+              Редактировать
+            </v-btn>
+            <v-btn
+              color="red"
+              class="ml-1"
+            >
+              <v-icon left>mdi-trash-can-outline</v-icon>
+              Удалить
+            </v-btn>
+          </td>
         </tr>
         </tbody>
       </template>
     </v-simple-table>
+    {{myTest}}
   </div>
 </template>
 

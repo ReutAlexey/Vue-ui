@@ -17,7 +17,6 @@ export default {
   components: {
     headBar
   }
-
 }
 </script>
 <style lang="sass">
