@@ -38,12 +38,16 @@
           <td>{{ test.category.category}}</td>
           <td>{{ test.calculation.type}}</td>
           <td style="color: springgreen">
-            {{ test.result }}
+            {{ test.results_avg_result ? +test.results_avg_result : 0}}
             <span v-show="test.calculation.slug === 'Ball'">B</span>
             <span v-show="test.calculation.slug === 'Percent'">%</span>
           </td>
           <td>
-            <v-btn color="warning">
+            <v-btn
+              color="warning"
+              :to="'/profile/' + 1 + '/edit/' + test.id"
+              disabled
+            >
               <v-icon left>mdi-pencil-outline</v-icon>
               Редактировать
             </v-btn>

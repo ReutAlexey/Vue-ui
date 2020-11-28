@@ -2,20 +2,20 @@
   <v-app
     style="background-color: #FFFFFF"
   >
-    <head-bar></head-bar>
-    <v-main>
+    <header-bar></header-bar>
+    <v-main class="mt-10">
       <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import headBar from '@/components/parts/HeadComponent'
+import headerBar from './shared/components/header/HeaderComponent'
 
 export default {
   name: 'App',
   components: {
-    headBar
+    headerBar
   },
   created () {
     if (this.$store.getters.IS_LOGGED_IN) {

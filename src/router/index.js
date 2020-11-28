@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home-old.vue'
 import authGuard from './auth-guard'
+import sharedRoute from '../app/shared/router'
 
 Vue.use(VueRouter)
 
 const routes = [
+  sharedRoute,
   {
     path: '/',
     component: Home
@@ -33,6 +35,10 @@ const routes = [
         path: 'my-tests',
         component: () => import('@/components/profile/my_tests/My-tests')
       }
+      /* {
+        path: 'edit/:idTest',
+        component: () => import('@/components/profile/update_test/UpdateTestComponent')
+      } */
     ]
   },
   // Route test

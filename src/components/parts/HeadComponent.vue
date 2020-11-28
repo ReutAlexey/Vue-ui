@@ -124,7 +124,7 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('IS_LOGGED')
+    // this.$store.dispatch('IS_LOGGED')
     axios({ url: this.$store.state.backendUrl + '/categories/tests', method: 'GET' })
       .then(response => {
         this.categories = response.data

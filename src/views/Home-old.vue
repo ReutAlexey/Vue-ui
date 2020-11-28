@@ -34,7 +34,7 @@ export default {
           src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
         },
         {
-          src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+          src: 'https://yt3.ggpht.com/a/AATXAJxUzR5HSM9Y9YSQD-eK33C7EgnbLMGlEgEx4otQ=s900-c-k-c0xffffffff-no-rj-mo'
         }
       ]
     }
