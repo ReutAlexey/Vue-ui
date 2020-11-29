@@ -10,7 +10,11 @@
         centered
       >
         <v-tab
-        ></v-tab>
+          v-for="link in GET_NAVIGATION_LINK"
+          :key="link.link"
+          :to="link.link"
+        >{{link.name}}
+        </v-tab>
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-tab
@@ -24,11 +28,14 @@
           </template>
           <v-list>
             <v-list-item
+              v-for="link in GET_CATEGORIES_LINKS"
+              :key="link.id"
             >
               <v-list-item-title>
                 <router-link
-                  :to="'/category/'"
+                  :to="'/category/' + link.slug + '/' + link.id"
                 >
+                  {{link.category}}
                 </router-link>
               </v-list-item-title>
             </v-list-item>
@@ -40,8 +47,16 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'AppBarComponent'
+  name: 'AppBarComponent',
+  computed: {
+    ...mapGetters(['GET_NAVIGATION_LINK', 'GET_CATEGORIES_LINKS'])
+  },
+  created () {
+    this.$store.dispatch('A_SET_CATEGORIES_LINK')
+  }
 }
 </script>
 

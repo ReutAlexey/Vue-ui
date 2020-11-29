@@ -3,7 +3,7 @@
     style="background-color: #FFFFFF"
   >
     <header-bar></header-bar>
-    <v-main class="mt-10">
+    <v-main class="main-container">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -18,21 +18,15 @@ export default {
     headerBar
   },
   created () {
-    if (this.$store.getters.IS_LOGGED_IN) {
+    if (this.$store.getters.IS_LOGGED) {
       console.log('is logged')
-      this.$store.dispatch('IS_LOGGED')
+    } else {
+      console.log('no token')
     }
   }
 }
 </script>
 <style lang="sass">
-.mainconteiner
+.main-container
   margin-top: 100px
-.description p
-  font-family: sans-serif
-  font-size: 20px
-  color: black
-.question
-  font-family: sans-serif
-  font-size: 20px
 </style>

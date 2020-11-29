@@ -1,12 +1,20 @@
 <template>
-<div class="mt-16">
-  <h1>Home</h1>
+<div>
+  <carousel></carousel>
+  <tests-list></tests-list>
 </div>
 </template>
 
 <script>
+import Carousel from '../components/Carousel-main'
+import testsList from '../components/Cards-list-tests'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Carousel,
+    testsList
+  }
 }
 </script>
 

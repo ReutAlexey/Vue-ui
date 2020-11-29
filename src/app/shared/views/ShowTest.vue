@@ -1,10 +1,15 @@
 <template>
-<div></div>
+  <test></test>
 </template>
 
 <script>
+import Test from '../components/test/Test'
+
 export default {
-  name: 'ShowTest'
+  name: 'ShowTest',
+  components: {
+    Test
+  }
 }
 </script>
 

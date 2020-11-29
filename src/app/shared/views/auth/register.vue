@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div class="mt-16"><h1>
+    Register
+  </h1></div>
 </template>
 
 <script>

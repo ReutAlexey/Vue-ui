@@ -8,6 +8,7 @@
       <v-toolbar-title>Test-Manager</v-toolbar-title>
       <v-spacer></v-spacer>
       <div
+        v-if="!IS_LOGGED"
       >
         <v-btn
           to="/register"
@@ -26,6 +27,7 @@
         </v-btn>
       </div>
       <div
+        v-if="IS_LOGGED"
       >
         <v-btn
           :to="'/profile/'"
@@ -47,8 +49,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  name: 'SystemBarComponent'
+  name: 'SystemBarComponent',
+  computed: {
+    ...mapGetters(['IS_LOGGED'])
+  }
 }
 </script>
 
