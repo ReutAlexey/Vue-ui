@@ -1,4 +1,4 @@
-export default {
+const shared = {
   state: {
     loading: false,
     errors: null
@@ -27,3 +27,5 @@ export default {
     GET_ERRORS: state => { return state.errors }
   }
 }
+
+export default shared

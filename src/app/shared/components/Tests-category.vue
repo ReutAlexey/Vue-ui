@@ -32,7 +32,7 @@
                 tile
               >
                 <v-img
-                  v-show="test.image.length > 1"
+                  v-show="test.image"
                   :src="test.image"></v-img>
               </v-avatar>
             </div>

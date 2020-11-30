@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default {
+const auth = {
   state: {
     user: {},
     accessToken: localStorage.getItem('accessToken') || false,
@@ -22,10 +22,11 @@ export default {
       }
     },
     async A_REGISTER ({ commit }, payload) {
-      commit('M_CLEAR_ERROR')
+      commit('M_CLEAR_ERRORS')
       commit('M_SET_LOADING', true)
       try {
         const user = await axios({ url: this.state.backendUrl + '/auth/register', method: 'PUT', data: payload })
+        console.log(user.data)
         commit('M_SUCCESS_AUTH', user.data)
         commit('M_SET_LOADING', false)
       } catch (error) {
@@ -52,6 +53,19 @@ export default {
         commit('M_SET_ERROR', error)
         commit('M_ERROR_AUTH')
       }
+    },
+    async A_LOGOUT ({ commit }) {
+      commit('M_SET_LOADING', true)
+      try {
+        await axios({ url: this.state.backendUrl + '/auth/logout', method: 'POST' })
+        commit('M_REMOVE_USER')
+        commit('M_SET_LOADING', false)
+      } catch (error) {
+        console.log(error)
+        commit('M_REMOVE_USER')
+        commit('M_SET_LOADING', false)
+        throw error
+      }
     }
 
   },
@@ -68,6 +82,12 @@ export default {
       state.accessToken = null
       localStorage.removeItem('access_token')
       state.user = {}
+    },
+    M_REMOVE_USER (state) {
+      state.user = {}
+      state.accessToken = false
+      localStorage.removeItem('access_token')
+      state.status = ''
     }
   },
   getters: {
@@ -75,3 +95,5 @@ export default {
     IS_LOGGED: state => { return state.accessToken }
   }
 }
+
+export default auth

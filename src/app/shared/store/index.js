@@ -2,6 +2,8 @@ import AppBar from './modules/heder_navigation'
 import Tests from './modules/tests/tests'
 import CategoryTests from './modules/tests/categoryTests'
 import Test from './modules/tests/test'
+import Auth from './modules/auth/auth'
+import Shared from './modules/shared'
 
 const sharedStore = {
   state: {},
@@ -12,7 +14,9 @@ const sharedStore = {
     AppBar,
     Tests,
     CategoryTests,
-    Test
+    Test,
+    Auth,
+    Shared
   }
 }
 

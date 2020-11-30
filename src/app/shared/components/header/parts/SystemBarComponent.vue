@@ -8,7 +8,7 @@
       <v-toolbar-title>Test-Manager</v-toolbar-title>
       <v-spacer></v-spacer>
       <div
-        v-if="!IS_LOGGED"
+        v-show="!IS_LOGGED"
       >
         <v-btn
           to="/register"
@@ -27,7 +27,7 @@
         </v-btn>
       </div>
       <div
-        v-if="IS_LOGGED"
+        v-show="IS_LOGGED"
       >
         <v-btn
           :to="'/profile/'"
@@ -37,8 +37,9 @@
           Личный кабитнет
         </v-btn>
         <v-btn
-          to=""
           text
+          @click="A_LOGOUT"
+          :loading="loading"
         >
           <v-icon left>mdi-login</v-icon>
           Выйти
@@ -49,11 +50,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'SystemBarComponent',
+  methods: {
+    ...mapActions(['A_LOGOUT'])
+  },
   computed: {
-    ...mapGetters(['IS_LOGGED'])
+    ...mapGetters(['IS_LOGGED']),
+    loading () {
+      return this.$store.getters.GET_LOADING
+    }
   }
 }
 </script>

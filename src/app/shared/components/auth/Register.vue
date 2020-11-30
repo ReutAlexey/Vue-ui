@@ -85,7 +85,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  name: 'register',
+  name: 'Register',
   data () {
     return {
       textRules: [
@@ -106,19 +106,19 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['A_REGISTER']),
+    ...mapActions(['REGISTER']),
     validate () {
       this.$refs.formRegister.validate()
     },
     register () {
       this.validate()
       if (this.valid) {
-        this.A_REGISTER(this.form)
+        this.REGISTER(this.form)
           .then(() => {
             this.$router.push('/')
           })
           .catch(error => {
-            const errors = Object.values(error.response.data.errors)
+            var errors = Object.values(error.response.data.errors)
             this.errorForm = errors.flat()
           })
       }
