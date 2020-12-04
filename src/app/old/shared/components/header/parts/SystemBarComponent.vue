@@ -4,6 +4,7 @@
       height="40"
       dark
       fixed
+      class="xs2"
     >
       <v-toolbar-title>Test-Manager</v-toolbar-title>
       <v-spacer></v-spacer>

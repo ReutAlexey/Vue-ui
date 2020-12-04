@@ -26,6 +26,7 @@
                 :src="test.image"
               >
                 <v-card-title>{{test.head}}</v-card-title>
+                <v-card-text>{{test.image}}</v-card-text>
               </v-img>
               <div class="row mr-2 ml-2">
                 <v-card-subtitle class="pb-0">

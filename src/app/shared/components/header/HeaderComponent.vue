@@ -1,19 +1,15 @@
 <template>
-  <div>
-    <system-bar></system-bar>
-    <app-bar></app-bar>
-  </div>
+    <div>
+      <site-bar></site-bar>
+    </div>
 </template>
 
 <script>
-import systemBar from './parts/SystemBarComponent'
-import appBar from './parts/AppBarComponent'
-
+import siteBar from './parts/SiteBarComponent'
 export default {
   name: 'HeaderComponent',
   components: {
-    systemBar,
-    appBar
+    siteBar
   }
 }
 </script>

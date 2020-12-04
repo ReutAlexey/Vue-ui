@@ -6,7 +6,7 @@ const userRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/app/shared/views/auth/login')
+    component: () => import('@/app/old/shared/views/auth/login')
   }
 ]
 
