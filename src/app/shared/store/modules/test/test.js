@@ -3,7 +3,8 @@ import axios from 'axios'
 const test = {
   state: {
     test: {},
-    questions: []
+    questions: [],
+    result: ''
   },
   actions: {
     async A_SET_TEST ({ commit }, testId) {
@@ -22,6 +23,14 @@ const test = {
       } catch (error) {
         console.log(error)
       }
+    },
+    async A_SET_CALCULATION_RESULT ({ commit }, answers) {
+      try {
+        const result = await axios({ url: this.state.backendUrl + '/front/calculations/result', data: answers, method: 'PUT' })
+        commit('M_SET_RESULT', result.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
   },
   mutations: {
@@ -29,11 +38,18 @@ const test = {
       state.test = payload
       state.test.user = payload.user.name
       state.test.category = payload.category.category
+    },
+    M_SET_QUESTIONS (state, questions) {
+      state.questions = questions
+    },
+    M_SET_RESULT (state, result) {
+      state.result = result
     }
   },
   getters: {
     GET_TEST: state => { return state.test },
-    GET_QUESTIONS: state => { return state.questions }
+    GET_QUESTIONS: state => { return state.questions },
+    GET_RESULT: state => { return state.result }
   }
 }
 

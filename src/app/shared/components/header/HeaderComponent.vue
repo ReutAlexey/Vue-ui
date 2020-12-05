@@ -35,8 +35,8 @@ export default {
     ],
     authorizationLinks: {
       guest: [
-        { title: 'Войти', icon: '', url: '' },
-        { title: 'Регистрация', icon: '', url: '' }
+        { title: 'Войти', icon: '', url: '', statusButton: 'disabled' },
+        { title: 'Регистрация', icon: '', url: '', statusButton: 'disabled' }
       ],
       user: [
         { title: 'Выйти', icon: '', url: '' },

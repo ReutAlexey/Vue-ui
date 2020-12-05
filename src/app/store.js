@@ -6,9 +6,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    backendUrl: 'http://apimanager.adsffdby.vh114.hosterby.com/api'
+    backendUrl: 'http://127.0.0.1:8000/api'
   },
   modules: {
     shared
   }
 })
+// 'http://apimanager.adsffdby.vh114.hosterby.com/api'

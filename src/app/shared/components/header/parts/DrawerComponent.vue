@@ -14,22 +14,25 @@
         v-for="link in links"
         :key="link.title"
         link
+        :to="link.url"
       >
         <v-icon left v-text="link.icon"></v-icon>
-          <router-link
-            tag="v-list-item-title"
-            v-text="link.title"
-            :to="link.url">
-          </router-link>
+        <v-list-item-title
+          v-text="link.title"
+        ></v-list-item-title>
        </v-list-item>
         <v-divider></v-divider>
         <v-list-item
           v-for="link in statusUser"
           :key="link.title"
           link
+          :disabled="link.statusButton"
         >
           <v-icon left v-text="link.icon"></v-icon>
-          <v-list-item-title :to="link.url" v-text="link.title"></v-list-item-title>
+          <v-list-item-title
+            :to="link.url"
+            v-text="link.title"
+          ></v-list-item-title>
         </v-list-item>
       </v-list>
     </v-card>

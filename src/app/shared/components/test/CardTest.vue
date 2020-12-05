@@ -1,5 +1,7 @@
 <template>
+  <div>
   <v-card
+    v-show="hide"
     class="mx-auto"
     max-width="900"
   >
@@ -28,19 +30,34 @@
         <v-btn
           block
           color="success"
-          @click="A_SET_QUESTIONS(getTestId)"
+          @click="showQuests"
         >Начать</v-btn>
       </v-card-actions>
   </v-card>
+    <quests
+      v-show="!hide"
+    ></quests>
+  </div>
 </template>
 
 <script>
+import quests from './parts/Quests'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'CardTest',
+  components: {
+    quests
+  },
+  data: () => ({
+    hide: true
+  }),
   methods: {
-    ...mapActions(['A_SET_TEST', 'A_SET_QUESTIONS'])
+    ...mapActions(['A_SET_TEST', 'A_SET_QUESTIONS']),
+    showQuests () {
+      this.A_SET_QUESTIONS(this.getTestId)
+      this.hide = false
+    }
   },
   computed: {
     ...mapGetters(['GET_TEST']),

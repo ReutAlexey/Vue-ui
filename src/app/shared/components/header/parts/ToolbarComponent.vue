@@ -26,6 +26,7 @@
         small
         color="#2F4F4F"
         :to="link.url"
+        :disabled="link.statusButton"
       >
         {{link.title}}
       </v-btn>
