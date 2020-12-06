@@ -5,6 +5,7 @@
         :links="links"
         :categories="categories"
         @click="onDrawer"
+        changeDrawer="changeDrawer"
       ></drawer>
       <toolbar
         :links="links"

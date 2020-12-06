@@ -14,5 +14,9 @@ export default [
   {
     path: '/registration',
     component: () => import('../views/auth/Register')
+  },
+  {
+    path: '/login',
+    component: () => import('../views/auth/Login')
   }
 ]

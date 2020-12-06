@@ -2,7 +2,7 @@
   <v-navigation-drawer
     app
     temporary
-    v-model="drawer"
+    :value="drawerChange"
   >
     <v-card
       class="mx-auto"

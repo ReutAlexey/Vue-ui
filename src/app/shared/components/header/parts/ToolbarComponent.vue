@@ -1,7 +1,7 @@
 <template>
   <v-toolbar dark color="#2F4F4F">
     <slot></slot>
-    <v-toolbar-title>Title</v-toolbar-title>
+    <v-toolbar-title>TestManager.by</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items
       class="hidden-sm-and-down"
