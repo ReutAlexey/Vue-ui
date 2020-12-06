@@ -10,5 +10,9 @@ export default [
   {
     path: '/category/:categoryName',
     component: () => import('../views/ShowCategory')
+  },
+  {
+    path: '/registration',
+    component: () => import('../views/auth/Register')
   }
 ]

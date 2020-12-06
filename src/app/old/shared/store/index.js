@@ -3,7 +3,7 @@ import Tests from './modules/tests/tests'
 import CategoryTests from './modules/tests/categoryTests'
 import Test from './modules/tests/test'
 import Auth from './modules/auth/auth'
-import Shared from './modules/shared'
+import Shared from '../../../shared/store/modules/shared'
 
 const sharedStore = {
   state: {},

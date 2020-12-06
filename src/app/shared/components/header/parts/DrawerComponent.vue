@@ -2,7 +2,7 @@
   <v-navigation-drawer
     app
     temporary
-    v-model="getDrawer"
+    v-model="drawer"
   >
     <v-card
       class="mx-auto"
@@ -45,29 +45,33 @@
         </v-list-group>
 
         <v-divider></v-divider>
-        <v-list-item
-          v-for="link in statusUser"
-          :key="link.title"
-          link
-          :disabled="link.statusButton"
-        >
-          <v-icon left v-text="link.icon"></v-icon>
-          <v-list-item-title
-            :to="link.url"
-            v-text="link.title"
-          ></v-list-item-title>
-        </v-list-item>
+        <link-auth></link-auth>
       </v-list>
     </v-card>
   </v-navigation-drawer>
 </template>
 
 <script>
+import linkAuth from './LinkDrawerAuthComponent'
+
 export default {
   name: 'DrawerComponent',
-  props: ['drawer', 'links', 'statusUser', 'categories'],
+  components: {
+    linkAuth
+  },
+  props: ['drawer', 'links', 'categories'],
+  data: () => ({
+    drawerOff: false
+  }),
+  methods: {
+    changeDrawer () {
+      this.$emit('changeDrawer', {
+        drawer: false
+      })
+    }
+  },
   computed: {
-    getDrawer () {
+    drawerChange () {
       return this.drawer
     }
   }
@@ -77,28 +81,3 @@ export default {
 <style scoped>
 
 </style>
-<!--
-<v-list-group
-          :value="true"
-          no-action
-          sub-group
-        >
-          <template v-slot:activator>
-            <v-list-item-content>
-              <v-list-item-title>Admin</v-list-item-title>
-            </v-list-item-content>
-          </template>
-
-          <v-list-item
-            v-for="([title, icon], i) in admins"
-            :key="i"
-            link
-          >
-            <v-list-item-title v-text="title"></v-list-item-title>
-
-            <v-list-item-icon>
-              <v-icon v-text="icon"></v-icon>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list-group>
--->

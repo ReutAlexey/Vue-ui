@@ -1,6 +1,7 @@
 const shared = {
   state: {
     loading: false,
+    drawer: false,
     errors: null
   },
   actions: {
@@ -24,7 +25,8 @@ const shared = {
   },
   getters: {
     GET_LOADING: state => { return state.loading },
-    GET_ERRORS: state => { return state.errors }
+    GET_ERRORS: state => { return state.errors },
+    GET_DRAWER: state => { return state.drawer }
   }
 }
 

@@ -1,5 +1,8 @@
 import tests from './modules/tests/tests'
 import test from './modules/test/test'
+import categoryList from './modules/category/category'
+import shared from './modules/shared/index'
+import auth from './modules/auth/auth'
 
 const sharedStore = {
   state: {},
@@ -8,7 +11,10 @@ const sharedStore = {
   getters: {},
   modules: {
     tests,
-    test
+    test,
+    categoryList,
+    shared,
+    auth
   }
 }
 

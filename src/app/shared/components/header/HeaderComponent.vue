@@ -1,14 +1,13 @@
 <template>
     <div>
       <drawer
-        :drawer="drawerValue"
+        :drawer="drawer"
         :links="links"
-        :statusUser="statusUser"
         :categories="categories"
+        @click="onDrawer"
       ></drawer>
       <toolbar
         :links="links"
-        :statusUser="statusUser"
       >
         <v-app-bar-nav-icon
           class="hidden-md-and-up"
@@ -22,6 +21,7 @@
 import toolbar from './parts/ToolbarComponent'
 import drawer from './parts/DrawerComponent'
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'HeaderComponent',
@@ -34,31 +34,18 @@ export default {
     links: [
       { title: 'На главную', icon: 'mdi-home', url: '/' }
     ],
-    authorizationLinks: {
-      guest: [
-        { title: 'Войти', icon: '', url: '', statusButton: 'disabled' },
-        { title: 'Регистрация', icon: '', url: '', statusButton: 'disabled' }
-      ],
-      user: [
-        { title: 'Выйти', icon: '', url: '' },
-        { title: 'Личный кабинет', icon: '', url: '' }
-      ]
-    },
-    categoriesLinks: [],
-    access: false
+    categoriesLinks: []
   }),
   methods: {
     onDrawer () {
       this.drawer = !this.drawer
+    },
+    changeDrawer (data) {
+      this.drawer = data.drawer
     }
   },
   computed: {
-    drawerValue () {
-      return this.drawer
-    },
-    statusUser () {
-      return this.access ? this.authorizationLinks.user : this.authorizationLinks.guest
-    },
+    ...mapGetters(['IS_LOGGED']),
     categories () {
       return this.categoriesLinks
     }

@@ -17,30 +17,25 @@
       </v-btn>
     </v-toolbar-items>
     <v-spacer></v-spacer>
-    <v-toolbar-items
+    <btn-toolbar
       class="hidden-sm-and-down"
-      v-for="link in statusUser"
-      :key="link.title"
-    >
-      <v-btn
-        small
-        color="#2F4F4F"
-        :to="link.url"
-        :disabled="link.statusButton"
-      >
-        {{link.title}}
-      </v-btn>
-    </v-toolbar-items>
+    ></btn-toolbar>
   </v-toolbar>
 </template>
 
 <script>
+import BtnToolbar from './buttonAuthComponent'
+
 export default {
   name: 'ToolbarComponent',
-  props: ['links', 'statusUser'],
+  components: {
+    BtnToolbar
+  },
+  props: ['links'],
   data: () => ({
-    drawer: false
-  })
+  }),
+  methods: {
+  }
 }
 </script>
 
