@@ -4,6 +4,7 @@
         :drawer="drawerValue"
         :links="links"
         :statusUser="statusUser"
+        :categories="categories"
       ></drawer>
       <toolbar
         :links="links"
@@ -20,6 +21,7 @@
 <script>
 import toolbar from './parts/ToolbarComponent'
 import drawer from './parts/DrawerComponent'
+import axios from 'axios'
 
 export default {
   name: 'HeaderComponent',
@@ -30,8 +32,7 @@ export default {
   data: () => ({
     drawer: false,
     links: [
-      { title: 'На главную', icon: 'mdi-home', url: '/' },
-      { title: 'Категории', icon: 'mdi-shape', url: '' }
+      { title: 'На главную', icon: 'mdi-home', url: '/' }
     ],
     authorizationLinks: {
       guest: [
@@ -43,6 +44,7 @@ export default {
         { title: 'Личный кабинет', icon: '', url: '' }
       ]
     },
+    categoriesLinks: [],
     access: false
   }),
   methods: {
@@ -56,7 +58,16 @@ export default {
     },
     statusUser () {
       return this.access ? this.authorizationLinks.user : this.authorizationLinks.guest
+    },
+    categories () {
+      return this.categoriesLinks
     }
+  },
+  created () {
+    axios({ url: this.$store.getters.GET_BACKEND_URL + '/front/categories', method: 'GET' })
+      .then(response => {
+        this.categoriesLinks = response.data
+      })
   }
 }
 </script>

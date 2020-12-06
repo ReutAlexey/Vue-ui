@@ -6,5 +6,9 @@ export default [
   {
     path: '/test/:testId',
     component: () => import('../views/ShowTest')
+  },
+  {
+    path: '/category/:categoryName',
+    component: () => import('../views/ShowCategory')
   }
 ]

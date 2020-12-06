@@ -8,7 +8,7 @@
     <v-img
       v-show="GET_TEST.image"
       class="white--text align-end"
-      height="400"
+      max-height="400"
       :src="GET_TEST.image"
     >
     </v-img>
@@ -55,18 +55,15 @@ export default {
   methods: {
     ...mapActions(['A_SET_TEST', 'A_SET_QUESTIONS']),
     showQuests () {
-      this.A_SET_QUESTIONS(this.getTestId)
+      this.A_SET_QUESTIONS(this.$route.params.testId)
       this.hide = false
     }
   },
   computed: {
-    ...mapGetters(['GET_TEST']),
-    getTestId () {
-      return this.$route.params.testId
-    }
+    ...mapGetters(['GET_TEST'])
   },
   created () {
-    this.A_SET_TEST(this.getTestId)
+    this.A_SET_TEST(this.$route.params.testId)
   }
 }
 </script>

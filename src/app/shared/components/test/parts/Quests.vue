@@ -8,8 +8,8 @@
     >
       <v-card-text>
         <v-img
-          v-if="GET_QUESTIONS[i].image"
-          :src="GET_QUESTIONS[i].image"
+          v-if="quest[i].image"
+          :src="quest[i].image"
           contain
           max-height="400"
           max-width="500"
@@ -18,7 +18,7 @@
           v-text="'Вопрос: ' + (i + 1) + '/' +  GET_QUESTIONS.length"
         ></v-card-title>
         <v-divider></v-divider>
-        <h3><b>{{GET_QUESTIONS[i].quest}}</b></h3>
+        <h3><b>{{quest[i].quest}}</b></h3>
       </v-card-text>
       <div
         class="d-flex"
@@ -26,13 +26,13 @@
         :key="answer.id"
       >
         <v-checkbox
-          v-show="answer.variant === 'text'"
+          v-if="answer.variant === 'text'"
           :label="answer.answer"
           :value="answer.id"
           v-model="arrayAnswers[i]"
         ></v-checkbox>
         <v-checkbox
-          v-show="answer.variant === 'image'"
+          v-if="answer.variant === 'image'"
           :label="answer.answer"
           :value="answer.id"
           v-model="arrayAnswers[i]"
@@ -63,12 +63,15 @@ export default {
     arrayAnswers: [[]]
   }),
   computed: {
-    ...mapGetters(['GET_QUESTIONS', 'GET_RESULT'])
+    ...mapGetters(['GET_QUESTIONS', 'GET_RESULT', 'GET_TEST']),
+    quest () {
+      return this.$store.getters.GET_QUESTIONS
+    }
   },
   methods: {
     nextQuestion () {
       if (this.i === (this.GET_QUESTIONS.length - 1) && this.arrayAnswers[this.i].length > 0) {
-        this.$store.dispatch('A_SET_CALCULATION_RESULT', { answers: this.arrayAnswers, testId: 1 })
+        this.$store.dispatch('A_SET_CALCULATION_RESULT', { answers: this.arrayAnswers, testId: this.GET_TEST.id })
       } else if (this.arrayAnswers[this.i].length > 0) {
         this.arrayAnswers.push([])
         ++this.i
