@@ -39,9 +39,9 @@
       <v-card-text>
         <component
           :is="variantAnswers"
-          v-for="(input, index) in answers"
+          v-for="input in answers"
           :key="input.id"
-          :index="index"
+          :index="input.id"
           @deleteInput="deleteInput"
           @acceptDataInput="acceptDataInput"
         ></component>
