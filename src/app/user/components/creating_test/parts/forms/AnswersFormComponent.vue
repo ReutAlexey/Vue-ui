@@ -75,7 +75,7 @@ export default {
       })
     },
     addAnswer () {
-      this.answers.push({ id: ++this.countId, type: '', status: false, answer: '' })
+      this.answers.push({ id: ++this.countId, variant: '', status: false, answer: '' })
     },
     deleteInput (index) {
       if (this.answers.length > 1) {

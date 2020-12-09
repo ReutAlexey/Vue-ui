@@ -13,6 +13,7 @@
       </v-toolbar>
       <v-card-text>
         <input-image
+          class="ml-3"
           @receiveImage="acceptImage"
           :text="'Выберите картинку к вопросу'"
         ></input-image>
@@ -32,12 +33,13 @@
           ></v-textarea>
         </v-col>
         <v-text-field
-          v-if="typeCounting === 0"
+          v-if="calculation === 1"
           label="Укажите кол-во баллов за правильный ответ"
           type="number"
           prepend-icon="mdi-counter"
-          v-model="score"
-          :rules="rules.required"
+          v-model="quest.score"
+          :rules="rules.intScope"
+          @input="writingQuest"
         ></v-text-field>
       </v-card-text>
       <answers-form @writingAnswers="acceptDataAnswers" />
@@ -58,11 +60,11 @@ export default {
   mixins: [validate],
   props: {
     questId: Number,
-    typeCounting: Number
+    calculation: Number
   },
   data: () => ({
     quest: {
-      score: null,
+      score: 0,
       quest: '',
       image: '',
       answers: []

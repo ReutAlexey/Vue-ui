@@ -11,8 +11,8 @@
           @change="previewThumbnail"
           class="Image-input__input"
           multiple
-          accept="image/jpeg,image/jpg,image/png"
-          size="1048576"
+          size="10485"
+          accept=".jpeg,.jpg"
           name="thumbnail"
           type="file">
       </div>
