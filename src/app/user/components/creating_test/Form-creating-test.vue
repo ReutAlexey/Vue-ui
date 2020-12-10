@@ -159,7 +159,6 @@
              </v-card-actions>
            </v-card>
       </v-form>
-      {{testForm}}
     </v-container>
 </template>
 
@@ -203,7 +202,6 @@ export default {
   }),
   methods: {
     acceptDataQuest (data) {
-      console.log(this.testForm.quests[data.id])
       this.testForm.quests[data.id].quest = data.quest.quest
       this.testForm.quests[data.id].image = data.quest.image
       this.testForm.quests[data.id].score = data.quest.score
@@ -217,7 +215,6 @@ export default {
       this.showQuest(this.countQuest)
     },
     showQuest (id) {
-      console.log(id)
       for (const quest of this.testForm.quests) {
         if (quest.id === id) {
           quest.style = 'form-show'
@@ -272,7 +269,6 @@ export default {
     axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests/create', method: 'GET' })
       .then(response => {
         this.formCreate = response.data
-        console.log(response.data)
       })
       .catch(error => {
         console.log(error)

@@ -3,13 +3,14 @@
     <test-result
       v-if="GET_RESULT"
     ></test-result>
+    {{quest}}
     <v-card
+
       v-if="!GET_RESULT"
     >
-      <v-card-text>
         <v-img
-          v-if="quest[i].image"
-          :src="quest[i].image"
+          v-if="GET_QUESTIONS[i].image !== ''"
+          :src="GET_QUESTIONS[i].image"
           contain
           max-height="400"
           max-width="500"
@@ -17,27 +18,50 @@
         <v-card-title
           v-text="'Вопрос: ' + (i + 1) + '/' +  GET_QUESTIONS.length"
         ></v-card-title>
+      <v-card-text>
         <v-divider></v-divider>
-        <h3><b>{{quest[i].quest}}</b></h3>
+        <h3><b>{{GET_QUESTIONS[i].quest}}</b></h3>
       </v-card-text>
-      <div
-        class="d-flex"
-        v-for="answer in GET_QUESTIONS[i].answers"
-        :key="answer.id"
+      <v-item-group
+        v-model="arrayAnswers[i]"
+        multiple
       >
-        <v-checkbox
-          v-if="answer.variant === 'text'"
-          :label="answer.answer"
-          :value="answer.id"
-          v-model="arrayAnswers[i]"
-        ></v-checkbox>
-        <v-checkbox
-          v-if="answer.variant === 'image'"
-          :label="answer.answer"
-          :value="answer.id"
-          v-model="arrayAnswers[i]"
-        ></v-checkbox>
-      </div>
+          <v-container class="pa-1">
+              <v-flex
+                v-for="answer in GET_QUESTIONS[i].answers"
+                :key="answer.id"
+              >
+                <v-checkbox
+                  v-if="answer.variant === 'text'"
+                  :label="answer.answer"
+                  :value="answer.id"
+                  v-model="arrayAnswers[i]"
+                ></v-checkbox>
+                <v-item
+                  v-else-if="answer.variant === 'image'"
+                  v-slot="{ active, toggle }"
+                  :value="answer.id"
+                >
+                  <v-img
+                    :style=" active ? 'border: 2px solid green' : ''"
+                    :src="answer.image"
+                    width="200"
+                    class="text-right pa-2"
+                    @click="toggle"
+                  >
+                    <v-btn
+                      icon
+                      dark
+                    >
+                      <v-icon>
+                        {{ active ? 'mdi-heart' : 'mdi-heart-outline' }}
+                      </v-icon>
+                    </v-btn>
+                  </v-img>
+                </v-item>
+              </v-flex>
+          </v-container>
+      </v-item-group>
       <v-card-actions>
         <v-btn
           color="primary"
@@ -60,12 +84,13 @@ export default {
   },
   data: () => ({
     i: 0,
-    arrayAnswers: [[]]
+    arrayAnswers: [[]],
+    questions: Array
   }),
   computed: {
     ...mapGetters(['GET_QUESTIONS', 'GET_RESULT', 'GET_TEST']),
     quest () {
-      return this.$store.getters.GET_QUESTIONS
+      return this.questions[this.i]
     }
   },
   methods: {
@@ -77,6 +102,9 @@ export default {
         ++this.i
       }
     }
+  },
+  created () {
+    this.questions = this.$store.dispatch('A_SET_QUESTIONS', this.$route.params.testId)
   }
 }
 </script>

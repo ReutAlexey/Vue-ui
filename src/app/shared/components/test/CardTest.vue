@@ -6,8 +6,7 @@
     max-width="900"
   >
     <v-img
-      v-show="GET_TEST.image"
-      class="white--text align-end"
+      v-if="GET_TEST.image"
       max-height="400"
       :src="GET_TEST.image"
     >
@@ -30,37 +29,38 @@
         <v-btn
           block
           color="success"
+          :to="'/test/' + GET_TEST.id + '/question'"
           @click="showQuests"
         >Начать</v-btn>
       </v-card-actions>
   </v-card>
-    <quests
-      v-show="!hide"
-    ></quests>
+    <router-view
+      v-if="!hide"
+    ></router-view>
   </div>
 </template>
 
 <script>
-import quests from './parts/Quests'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'CardTest',
   components: {
-    quests
   },
   data: () => ({
     hide: true
   }),
   methods: {
-    ...mapActions(['A_SET_TEST', 'A_SET_QUESTIONS']),
+    ...mapActions(['A_SET_TEST']),
     showQuests () {
-      this.A_SET_QUESTIONS(this.$route.params.testId)
       this.hide = false
     }
   },
   computed: {
-    ...mapGetters(['GET_TEST'])
+    ...mapGetters(['GET_TEST']),
+    image () {
+      return this.GET_TEST.image
+    }
   },
   created () {
     this.A_SET_TEST(this.$route.params.testId)
