@@ -21,8 +21,5 @@ new Vue({
   router,
   store,
   vuetify,
-  data: () => ({
-    drawer: false
-  }),
   render: h => h(App)
 }).$mount('#app')

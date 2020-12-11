@@ -21,6 +21,14 @@ export default {
   name: 'App',
   components: {
     navBar
+  },
+  created () {
+    this.$store.dispatch('A_REMEMBER_ME')
+      .catch(() => {
+        if (this.$route.path !== '/') {
+          this.$router.push('/')
+        }
+      })
   }
 }
 </script>

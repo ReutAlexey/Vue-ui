@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home-old.vue'
-import authGuard from './auth-guard'
+import authGuard from '../../app/user/router/auth-guard'
 import sharedRoute from '../app/shared/router'
 
 Vue.use(VueRouter)
