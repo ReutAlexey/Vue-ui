@@ -3,6 +3,7 @@
     app
     temporary
     :value="drawerChange"
+    width="300"
   >
     <v-card
       class="mx-auto"

@@ -1,16 +1,21 @@
 <template>
   <div>
-    <form-creating-test></form-creating-test>
   </div>
 </template>
 
 <script>
-import formCreatingTest from '../components/creating_test/Form-creating-test'
+import axios from 'axios'
 
 export default {
   name: 'Profile',
-  components: {
-    formCreatingTest
+  created () {
+    axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests', method: 'GET' })
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 </script>

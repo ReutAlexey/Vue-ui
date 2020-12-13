@@ -266,14 +266,13 @@ export default {
     }
   },
   beforeCreate () {
-    this.$store.dispatch('createF')
-    /* axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests/create', method: 'GET' })
+    axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests/create', method: 'GET' })
       .then(response => {
         this.formCreate = response.data
       })
       .catch(error => {
         console.log(error)
-      }) */
+      })
   }
 }
 </script>

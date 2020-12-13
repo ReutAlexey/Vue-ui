@@ -101,10 +101,10 @@ export default {
       valid: false,
       errorForm: null,
       form: {
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
+        name: ''.trim(),
+        email: ''.trim(),
+        password: ''.trim(),
+        password_confirmation: ''.trim()
       }
     }
   },
