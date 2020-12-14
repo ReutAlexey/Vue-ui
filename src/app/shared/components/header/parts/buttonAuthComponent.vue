@@ -1,16 +1,35 @@
 <template>
   <v-toolbar-items
   >
-    <v-btn
-      v-show="IS_LOGGED"
-      link
-      to="/profile"
-      small
-      color="#2F4F4F"
+    <v-menu
+      transition="slide-x-transition"
+      bottom
+      right
     >
-      <v-icon left>mdi-account-box-outline</v-icon>
-      Личный кабинет
-    </v-btn>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          v-show="IS_LOGGED"
+          small
+          color="#2F4F4F"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          Личный кабинет
+        </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in userLink"
+          :key="i"
+          link
+          :to="item.link"
+        >
+          <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
     <v-btn
       v-show="IS_LOGGED"
       small
@@ -50,6 +69,13 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'buttonAuthComponent',
   mixins: [logout],
+  data: () => ({
+    userLink: [
+      { link: '/create-test', icon: 'mdi-newspaper-plus', title: 'Создать тест' },
+      { link: '', icon: 'mdi-clipboard-list-outline', title: 'Мои тесты' },
+      { link: '', icon: 'mdi-order-bool-descending-variant', title: 'Пройденые тесты' }
+    ]
+  }),
   computed: {
     ...mapGetters(['IS_LOGGED'])
   }

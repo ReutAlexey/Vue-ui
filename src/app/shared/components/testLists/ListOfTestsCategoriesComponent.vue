@@ -10,7 +10,6 @@
       <v-col
         cols="12"
         md="6"
-        v-for="test in categoryList"
         :key="test.id"
       >
         <v-hover
@@ -30,7 +29,7 @@
                 ></v-card-title>
                 <v-card-subtitle v-text="test.description"></v-card-subtitle>
                 <v-card-text v-text="'Автор: ' + test.user.name"></v-card-text>
-                <v-card-text v-text="'Дата: ' + test.created_at"></v-card-text>
+                <v-card-text v-text="'Дата: ' + test.data"></v-card-text>
               </div>
               <v-avatar
                 class="ma-3"

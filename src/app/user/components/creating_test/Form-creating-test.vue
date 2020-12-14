@@ -257,7 +257,9 @@ export default {
         this.validateCheckBox()
         if (this.errorCheckbox === '') {
           axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests', data: this.testForm, method: 'POST' })
-            .then(response => console.log(response))
+            .then(response => {
+              this.$router.push('/test/' + response.data.id)
+            })
             .catch(error => {
               console.log(error.response)
             })

@@ -18,6 +18,7 @@
                 :class="{ 'on-hover': hover }"
                 class="mx-auto"
                 max-width="400"
+                max-height="400"
                 :to="'test/' + test.id"
               >
                 <v-img
@@ -30,11 +31,12 @@
                 <v-card-title>Title</v-card-title>
                 <div class="row mr-2 ml-2">
                   <v-card-subtitle class="pb-0">
-                    Категория: {{test.category.category}}
+                    Категория: {{test.category.category}} <br>
+                    Автор: {{test.user.name}}
                   </v-card-subtitle>
                   <v-spacer></v-spacer>
                   <v-card-subtitle>
-                    Автор: {{test.user.name}}
+
                   </v-card-subtitle>
                 </div>
               </v-card>
