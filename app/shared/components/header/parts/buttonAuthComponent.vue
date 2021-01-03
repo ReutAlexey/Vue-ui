@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import logout from '@/app/shared/mixins/logout'
+import logout from '../../../mixins/logout'
 import { mapGetters } from 'vuex'
 
 export default {

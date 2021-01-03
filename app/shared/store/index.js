@@ -1,7 +1,7 @@
 import tests from './modules/tests/tests'
 import test from './modules/test/test'
 import categoryList from './modules/category/category'
-import shared from './modules/shared/index'
+import shared from './modules/shared'
 import auth from './modules/auth/auth'
 
 const sharedStore = {

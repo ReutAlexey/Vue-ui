@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import writingValue from '@/app/user/mixins/valuesAnswer'
-import validate from '@/app/user/mixins/validate'
+import writingValue from '../../../../mixins/valuesAnswer'
+import validate from '../../../../mixins/validate'
 
 export default {
   name: 'Text-variant-answer',
