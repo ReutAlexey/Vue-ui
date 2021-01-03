@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import App from './app/App.vue'
-import router from './app/router'
-import store from './app/store'
 import vuetify from './app/plugins/vuetify'
 import Vuex from 'vuex'
 import axios from 'axios'
+import App from './App'
+import router from './app/router'
 
 Vue.use(Vuex)
 
@@ -19,7 +18,6 @@ if (token) {
 
 new Vue({
   router,
-  store,
   vuetify,
   render: h => h(App)
 }).$mount('#app')

@@ -10,10 +10,7 @@
       <toolbar
         :links="links"
       >
-        <v-app-bar-nav-icon
-          class="hidden-md-and-up"
-          @click="onDrawer"
-        ></v-app-bar-nav-icon>
+
       </toolbar>
     </div>
 </template>
