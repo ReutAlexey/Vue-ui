@@ -3,7 +3,6 @@
     style="background-color: #FFFFFF"
   >
     <Header></Header>
-    Head
     <v-main>
       <router-view></router-view>
     </v-main>

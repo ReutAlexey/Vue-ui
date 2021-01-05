@@ -1,6 +1,6 @@
-/*import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
-import shared from './shared/store'
+import shared from './Shared/store'
 
 Vue.use(Vuex)
 
@@ -14,6 +14,6 @@ export default new Vuex.Store({
   getters: {
     GET_BACKEND_URL: state => { return state.backendUrl }
   }
-})*/
+})
 // 'http://apimanager.adsffdby.vh114.hosterby.com/api'
 // 'http://127.0.0.1:8000/api'
