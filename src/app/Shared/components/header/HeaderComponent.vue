@@ -1,13 +1,19 @@
 <template>
   <div>
-    <drawer
-      :changeDrawer="drawer"
-    ></drawer>
+    <v-navigation-drawer
+      app
+      temporary
+      v-model="drawer"
+      width="300"
+    >
+      <drawer-list></drawer-list>
+    </v-navigation-drawer>
     <v-toolbar
       dark color="#2F4F4F"
     >
       <v-app-bar-nav-icon
         class="hidden-md-and-up"
+        @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-toolbar-title>TestManager.by</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -17,11 +23,11 @@
           <v-btn
             x-small
             color="#2F4F4F"
-            v-for="link in links"
-            :key="link.link"
-            :to="link.link"
+            v-for="item in GET_NAVIGATION"
+            :key="item.url"
+            :to="item.url"
           >
-            {{ link.name }}
+            {{ item.name }}
           </v-btn>
         <v-menu
           bottom
@@ -58,27 +64,19 @@
 </template>
 
 <script>
-import drawer from './parts/DrawerComponent'
 import { mapActions, mapGetters } from 'vuex'
+import drawerList from './parts/DrawerMenuComponent'
 
 export default {
   name: 'HeaderComponent',
   components: {
-    drawer
+    drawerList
   },
   data: () => ({
-    drawer: false,
-    links: [
-      { link: '/', name: 'Главная' }
-    ],
-    categoryLinks: [
-      { category: 'Разное', id: '1' },
-      { category: 'PDD', id: '2' },
-      { category: 'IQ', id: '3' }
-    ]
+    drawer: false
   }),
   computed: {
-    ...mapGetters(['GET_LIST_CATEGORIES'])
+    ...mapGetters(['GET_LIST_CATEGORIES', 'GET_NAVIGATION'])
   },
   methods: {
     ...mapActions(['A_LIST_CATEGORIES'])

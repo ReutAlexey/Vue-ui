@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     next (url) {
-      this.$store.commit('M_SET_RESULT', false)
+      this.$store.commit('M_SET_RESULT', '')
       this.$router.push(url)
     }
   }

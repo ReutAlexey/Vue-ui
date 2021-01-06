@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const result = {
   state: {
-    result: false,
+    result: '',
     description: ''
   },
   actions: {
