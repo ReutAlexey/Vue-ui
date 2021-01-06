@@ -3,9 +3,10 @@
     <v-navigation-drawer
       app
       temporary
-      v-model="drawer"
+      v-model="valueDrawer"
       width="300"
     >
+      <h1>Леша Хаян</h1>
     </v-navigation-drawer>
   </div>
 </template>
@@ -13,13 +14,15 @@
 <script>
 export default {
   name: 'DrawerComponent',
-  props: ['changeDrawer'],
   data: () => ({
     drawer: false
   }),
+  props: ['valueDrawer'],
+  methods: {
+  },
   watch: {
-    changeDrawer () {
-      this.drawer = this.changeDrawer
+    dra () {
+      this.drawer = this.valueDrawer
     }
   }
 }
