@@ -18,6 +18,14 @@ export default {
     Header
   },
   created () {
+    if (this.$store.getters.IS_LOGGED) {
+      this.$store.dispatch('A_REFRESH_TOKEN')
+        .catch(() => {
+          if (this.$route.path !== '/') {
+            this.$router.push('/')
+          }
+        })
+    }
   }
 }
 </script>

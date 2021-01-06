@@ -1,3 +1,5 @@
+import checkToken from './checkToken'
+
 export default [
   {
     path: '/',
@@ -5,7 +7,8 @@ export default [
   },
   {
     path: '/category/:slug',
-    component: () => import('./views/categoryTests')
+    component: () => import('./views/categoryTests'),
+    beforeEnter: checkToken
   },
   {
     path: '/test/:id',
@@ -20,5 +23,9 @@ export default [
   {
     path: '/result',
     component: () => import('./views/result')
+  },
+  {
+    path: '/registration',
+    component: () => import('./views/auth/register')
   }
 ]

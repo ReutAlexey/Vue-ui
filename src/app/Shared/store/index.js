@@ -3,6 +3,7 @@ import tests from './modules/tests/tests'
 import test from './modules/test/test'
 import result from './modules/result/result'
 import navigations from './modules/navigationMenu/navigations'
+import auth from './modules/auth/auth'
 
 const sharedStore = {
   state: {},
@@ -14,7 +15,8 @@ const sharedStore = {
     tests,
     test,
     result,
-    navigations
+    navigations,
+    auth
   }
 }
 

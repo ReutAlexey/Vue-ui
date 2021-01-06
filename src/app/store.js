@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import shared from './Shared/store'
+import sharedStore from './Shared/store'
+import userStore from './user/store'
 
 Vue.use(Vuex)
 
@@ -9,7 +10,8 @@ export default new Vuex.Store({
     backendUrl: 'http://127.0.0.1:8000/api'
   },
   modules: {
-    shared
+    sharedStore,
+    userStore
   },
   getters: {
     GET_BACKEND_URL: state => { return state.backendUrl }
