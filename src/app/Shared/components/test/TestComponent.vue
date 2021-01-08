@@ -31,7 +31,7 @@
           color="success"
           @click="showeQuestion"
           :to="'/test/' + GET_TEST.id + '/question'"
-        >Начать</v-btn>+
+        >Начать</v-btn>
       </v-card-actions>
     </v-card>
     <router-view></router-view>

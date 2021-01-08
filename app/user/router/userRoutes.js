@@ -1,4 +1,4 @@
-import checkAuth from './auth-guard'
+import checkAuth from './helpers/auth-guard'
 
 export default [
   {

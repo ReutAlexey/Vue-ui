@@ -16,6 +16,19 @@ const auth = {
         commit('M_ERROR_AUTH')
         commit('M_SET_LOADING', false)
       }
+    },
+    async A_LOGIN ({ commit }, form) {
+      try {
+        commit('M_SET_LOADING', true)
+        const user = await axios({ url: this.state.backendUrl + '/auth/login', data: form, method: 'PUT' })
+        commit('M_SUCCESS_AUTH', user.data)
+        commit('M_SET_LOADING', false)
+      } catch (error) {
+        console.log(error.response)
+        commit('M_SET_ERROR', error)
+        commit('M_ERROR_AUTH')
+        commit('M_SET_LOADING', false)
+      }
     }
   },
   mutations: {

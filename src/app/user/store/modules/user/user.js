@@ -10,9 +10,25 @@ const user = {
       try {
         const token = await axios({ url: this.state.backendUrl + '/auth/refresh', method: 'POST' })
         commit('M_SUCCESS_AUTH', token.data)
-        console.log(token.data)
       } catch (error) {
         commit('M_ERROR_AUTH')
+      }
+    },
+    async A_LOGOUT ({ commit }) {
+      try {
+        await axios({ url: this.state.backendUrl + '/auth/logout', method: 'POST' })
+        commit('M_ERROR_AUTH')
+      } catch (error) {
+        commit('M_ERROR_AUTH')
+      }
+    },
+    async A_AUTH_ME ({ commit, dispatch }) {
+      try {
+        console.log('me')
+        const user = await axios({ url: this.state.backendUrl + '/auth/me', method: 'POST' })
+        commit('M_SET_USER', user.data)
+      } catch (error) {
+        dispatch('A_REFRESH_TOKEN')
       }
     }
   },
@@ -27,10 +43,14 @@ const user = {
       state.accessToken = null
       localStorage.removeItem('access_token')
       state.user = {}
+    },
+    M_SET_USER (state, user) {
+      state.user = user
     }
   },
   getters: {
-    IS_LOGGED: state => { return state.accessToken }
+    IS_LOGGED: state => { return state.accessToken },
+    GET_USER: state => { return state.user }
   }
 }
 

@@ -17,14 +17,9 @@ export default {
   components: {
     Header
   },
-  created () {
+  async created () {
     if (this.$store.getters.IS_LOGGED) {
-      this.$store.dispatch('A_REFRESH_TOKEN')
-        .catch(() => {
-          if (this.$route.path !== '/') {
-            this.$router.push('/')
-          }
-        })
+      await this.$store.dispatch('A_AUTH_ME')
     }
   }
 }

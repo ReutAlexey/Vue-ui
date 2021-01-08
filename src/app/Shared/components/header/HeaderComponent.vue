@@ -59,6 +59,16 @@
         </v-menu>
       </v-toolbar-items>
       <v-spacer></v-spacer>
+      <nav-auth
+        class="hidden-sm-and-down"
+        v-if="!IS_LOGGED"
+      >
+      </nav-auth>
+      <nav-account
+        class="hidden-sm-and-down"
+        v-if="IS_LOGGED"
+      >
+      </nav-account>
     </v-toolbar>
   </div>
 </template>
@@ -66,17 +76,21 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import drawerList from './parts/DrawerMenuComponent'
+import navAuth from './parts/AuthNavigationComponent'
+import navAccount from './parts/AccountNavigationComponent'
 
 export default {
   name: 'HeaderComponent',
   components: {
-    drawerList
+    drawerList,
+    navAuth,
+    navAccount
   },
   data: () => ({
     drawer: false
   }),
   computed: {
-    ...mapGetters(['GET_LIST_CATEGORIES', 'GET_NAVIGATION'])
+    ...mapGetters(['GET_LIST_CATEGORIES', 'GET_NAVIGATION', 'IS_LOGGED'])
   },
   methods: {
     ...mapActions(['A_LIST_CATEGORIES'])
