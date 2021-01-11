@@ -49,7 +49,7 @@
 <script>
 import answersForm from './AnswersFormComponent'
 import inputImage from '../inputs/Input-uploading-image'
-import validate from '../../../../mixins/validate'
+import validate from '../../../../../../../app/user/mixins/validate'
 
 export default {
   name: 'QuestFormComponent',

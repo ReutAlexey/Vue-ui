@@ -23,7 +23,7 @@
                  label="Категория"
                  :rules="rules.requiredSelect"
                  :items="formCreate['categories']"
-                 item-text="category"
+                 item-text="title"
                  item-value="id"
                  v-model="testForm.category_id"
                ></v-select>
@@ -31,7 +31,7 @@
                  class="ma-2"
                  label="Тип подсчёта"
                  :rules="rules.requiredSelect"
-                 :items="formCreate['typeCalculation']"
+                 :items="formCreate['calculations']"
                  item-text="type"
                  item-value="id"
                  v-model="testForm.calculation_id"
@@ -40,7 +40,7 @@
                  class="ma-2"
                  label="Видимость"
                  :rules="rules.requiredSelect"
-                 :items="formCreate['typeAccess']"
+                 :items="formCreate['access']"
                  item-text="type"
                  item-value="id"
                  v-model="testForm.access_id"
@@ -110,7 +110,7 @@
                  color="primary"
                  small
                  class="ma-1"
-                 v-for="(item, index) in testForm.quests"
+                 v-for="(item, index) in testForm.questions"
                  :key="item.id"
                  @click="showQuest(item.id)"
                >
@@ -127,7 +127,7 @@
                :typeCounting="testForm.calculation_id"
                class="col-12"
                @writingQuest="acceptDataQuest"
-               v-for="quest in testForm.quests"
+               v-for="quest in testForm.questions"
                :key="quest.id"
                :questId="quest.id"
                :calculation="testForm.calculation_id"
@@ -155,6 +155,7 @@
                  color="success"
                  class="mt-4"
                  @click="saveTest"
+                 :loading="loading"
                >Сохранить</v-btn>
              </v-card-actions>
            </v-card>
@@ -165,7 +166,7 @@
 <script>
 import inputImage from './parts/inputs/Input-uploading-image'
 import questForm from './parts/forms/QuestFormComponent'
-import validate from '../../mixins/validate'
+import validate from '../../../../../app/user/mixins/validate'
 import axios from 'axios'
 
 export default {
@@ -176,6 +177,7 @@ export default {
   },
   mixins: [validate],
   data: () => ({
+    loading: false,
     errorCheckbox: '',
     formCreate: [],
     countQuest: 0,
@@ -188,7 +190,7 @@ export default {
       image: '',
       head: '',
       description: '',
-      quests: [
+      questions: [
         {
           style: 'show-form',
           id: 0,
@@ -202,20 +204,20 @@ export default {
   }),
   methods: {
     acceptDataQuest (data) {
-      this.testForm.quests[data.id].quest = data.quest.quest
-      this.testForm.quests[data.id].image = data.quest.image
-      this.testForm.quests[data.id].score = data.quest.score
-      this.testForm.quests[data.id].answers = data.quest.answers
+      this.testForm.questions[data.id].quest = data.quest.quest
+      this.testForm.questions[data.id].image = data.quest.image
+      this.testForm.questions[data.id].score = data.quest.score
+      this.testForm.questions[data.id].answers = data.quest.answers
     },
     acceptImage (data) {
       this.testForm.image = data.image
     },
     addQuest () {
-      this.testForm.quests.push({ style: 'show-form', id: ++this.countQuest, image: '', quest: '', score: '', answers: Array })
+      this.testForm.questions.push({ style: 'show-form', id: ++this.countQuest, image: '', quest: '', score: '', answers: Array })
       this.showQuest(this.countQuest)
     },
     showQuest (id) {
-      for (const quest of this.testForm.quests) {
+      for (const quest of this.testForm.questions) {
         if (quest.id === id) {
           quest.style = 'form-show'
         } else {
@@ -226,15 +228,15 @@ export default {
     deleteQuest (id) {
       if (this.testForm.quests.length > 1) {
         if (confirm('Вы действительно хотите удалить вопрос №' + (id + 1))) {
-          this.testForm.quests.splice(id, 1)
-          this.testForm.quests[this.testForm.quests.length - 1].style = 'form-show'
+          this.testForm.questions.splice(id, 1)
+          this.testForm.questions[this.testForm.questions.length - 1].style = 'form-show'
         }
       }
     },
     validateCheckBox () {
       this.errorCheckbox = ''
       var iteratorCount = 0
-      for (var quest of this.testForm.quests) {
+      for (var quest of this.testForm.questions) {
         var flag = false
         ++iteratorCount
         for (var answer of quest.answers) {
@@ -256,11 +258,15 @@ export default {
       if (this.valid) {
         this.validateCheckBox()
         if (this.errorCheckbox === '') {
+          this.loading = true
           axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests', data: this.testForm, method: 'POST' })
             .then(response => {
-              this.$router.push('/test/' + response.data.id)
+              this.loading = true
+              console.log(response.data)
+              this.$router.push('/test/' + response.data)
             })
             .catch(error => {
+              this.loading = true
               console.log(error.response)
             })
         }

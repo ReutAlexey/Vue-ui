@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import writingValue from '../../../../mixins/valuesAnswer'
+import writingValue from '../../../../../../../app/user/mixins/valuesAnswer'
 import InputImage from './Input-uploading-image'
 
 export default {

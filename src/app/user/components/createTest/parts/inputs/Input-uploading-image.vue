@@ -10,11 +10,13 @@
         <input
           @change="previewThumbnail"
           class="Image-input__input"
-          multiple
-          size="10485"
+          type="file"
           accept=".jpeg,.jpg"
+          multiple
+          size="100485"
+
           name="thumbnail"
-          type="file">
+          >
       </div>
     </div>
   </div>

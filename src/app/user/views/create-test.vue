@@ -1,15 +1,15 @@
 <template>
-  <div><h1>create test page</h1></div>
+  <div>
+    <h1>create test page</h1>
+    <form-create-test></form-create-test>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-
+import formCreateTest from '@/app/user/components/createTest/FormCreatingTestComponent'
 export default {
-  async created () {
-    await axios({ url: this.$store.getters.GET_BACKEND_URL + '/auth/me', method: 'POST' })
-      .then(r => { console.log(r.data) })
-      .catch(e => { console.log(e.response) })
+  components: {
+    formCreateTest
   }
 }
 </script>

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import formCreatingTest from '../components/creating_test/Form-creating-test'
+import formCreatingTest from '@/app/user/components/createTest/FormCreatingTestComponent'
 
 export default {
   name: 'ShowCreateTest',
