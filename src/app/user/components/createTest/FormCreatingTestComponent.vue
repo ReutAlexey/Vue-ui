@@ -261,12 +261,12 @@ export default {
           this.loading = true
           axios({ url: this.$store.getters.GET_BACKEND_URL + '/user/tests', data: this.testForm, method: 'POST' })
             .then(response => {
-              this.loading = true
+              this.loading = false
               console.log(response.data)
               this.$router.push('/test/' + response.data)
             })
             .catch(error => {
-              this.loading = true
+              this.loading = false
               console.log(error.response)
             })
         }

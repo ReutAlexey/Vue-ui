@@ -86,7 +86,7 @@ export default {
       this.validate()
       if (this.valid) {
         this.A_LOGIN({ email: this.form.email.trim(), password: this.form.password.trim() })
-          .then(() => {
+          .then(r => {
             this.$router.push('/')
           })
           .catch(error => {

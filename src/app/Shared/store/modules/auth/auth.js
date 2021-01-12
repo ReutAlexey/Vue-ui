@@ -25,7 +25,6 @@ const auth = {
         commit('M_SET_LOADING', false)
       } catch (error) {
         console.log(error.response)
-        commit('M_SET_ERROR', error)
         commit('M_ERROR_AUTH')
         commit('M_SET_LOADING', false)
       }

@@ -2,7 +2,7 @@
   <div>
     <v-card
       v-if="hide"
-      class="mx-auto"
+      class="mx-auto mt-2"
       max-width="900"
     >
       <v-img

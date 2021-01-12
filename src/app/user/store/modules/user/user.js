@@ -24,7 +24,6 @@ const user = {
     },
     async A_AUTH_ME ({ commit, dispatch }) {
       try {
-        console.log('me')
         const user = await axios({ url: this.state.backendUrl + '/auth/me', method: 'POST' })
         commit('M_SET_USER', user.data)
       } catch (error) {
